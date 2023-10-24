@@ -1,0 +1,7 @@
+{
+	"common_dir" : "C:/git/tsm-emb-hardw/lab1getStarted/",
+	"acds_version" : "Version 18.1.0",
+	"platform" : "windows",
+	"os" : "Windows 10",
+	"qpf" : "lab1GetStarted.qpf"
+}
