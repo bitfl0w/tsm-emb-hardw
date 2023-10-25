@@ -51,22 +51,6 @@
          type = "String";
       }
    }
-   element Parallel_Port_0
-   {
-      datum _sortIndex
-      {
-         value = "6";
-         type = "int";
-      }
-   }
-   element Parallel_Port_0.avalon_slave
-   {
-      datum baseAddress
-      {
-         value = "33558544";
-         type = "String";
-      }
-   }
    element SDRAM_ctrl
    {
       datum _sortIndex
@@ -108,23 +92,87 @@
    {
       datum baseAddress
       {
+         value = "33558576";
+         type = "String";
+      }
+   }
+   element lab3_sopc
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
+   element lab3_sopc
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
+   element lab3_sopc
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
+   element lab3_sopc
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
+   element parallel_port_buttons
+   {
+      datum _sortIndex
+      {
+         value = "8";
+         type = "int";
+      }
+   }
+   element parallel_port_buttons.av
+   {
+      datum baseAddress
+      {
+         value = "33558544";
+         type = "String";
+      }
+   }
+   element parallel_port_led2
+   {
+      datum _sortIndex
+      {
+         value = "6";
+         type = "int";
+      }
+   }
+   element parallel_port_led2.av
+   {
+      datum baseAddress
+      {
          value = "33558560";
          type = "String";
       }
    }
-   element lab3_sopc
+   element parallel_port_led3
    {
-      datum _originalDeviceFamily
+      datum _sortIndex
       {
-         value = "Cyclone IV E";
-         type = "String";
+         value = "7";
+         type = "int";
       }
    }
-   element lab3_sopc
+   element parallel_port_led3.av
    {
-      datum _originalDeviceFamily
+      datum baseAddress
       {
-         value = "Cyclone IV E";
+         value = "33558552";
          type = "String";
       }
    }
@@ -140,7 +188,7 @@
    {
       datum baseAddress
       {
-         value = "33558552";
+         value = "33558568";
          type = "String";
       }
    }
@@ -165,12 +213,23 @@
  <parameter name="timeStamp" value="0" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
- <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
  <interface
-   name="pio_port"
-   internal="Parallel_Port_0.conduit_end"
+   name="buttons"
+   internal="parallel_port_buttons.pio_port"
    type="conduit"
    dir="end" />
+ <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
+ <interface
+   name="led_row2"
+   internal="parallel_port_led2.pio_port"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="led_row3"
+   internal="parallel_port_led3.pio_port"
+   type="conduit"
+   dir="end" />
+ <interface name="pio_port" internal="parallel_port_led2.conduit_end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
  <interface name="sdram_clk" internal="PLL.c2" type="clock" dir="start" />
  <interface
@@ -198,7 +257,7 @@
   <parameter name="dataAddrWidth" value="26" />
   <parameter name="dataMasterHighPerformanceAddrWidth" value="1" />
   <parameter name="dataMasterHighPerformanceMapParam" value="" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='SDRAM_ctrl.s1' start='0x1000000' end='0x2000000' type='altera_avalon_new_sdram_controller.s1' /><slave name='CPU.debug_mem_slave' start='0x2000800' end='0x2001000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='PLL.pll_slave' start='0x2001000' end='0x2001010' type='altpll.pll_slave' /><slave name='Parallel_Port_0.avalon_slave' start='0x2001010' end='0x2001018' type='Parallel_Port.avalon_slave' /><slave name='sysid.control_slave' start='0x2001018' end='0x2001020' type='altera_avalon_sysid_qsys.control_slave' /><slave name='jtag_uart.avalon_jtag_slave' start='0x2001020' end='0x2001028' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='SDRAM_ctrl.s1' start='0x1000000' end='0x2000000' type='altera_avalon_new_sdram_controller.s1' /><slave name='CPU.debug_mem_slave' start='0x2000800' end='0x2001000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='PLL.pll_slave' start='0x2001000' end='0x2001010' type='altpll.pll_slave' /><slave name='parallel_port_buttons.av' start='0x2001010' end='0x2001018' type='Parallel_Port.av' /><slave name='parallel_port_led3.av' start='0x2001018' end='0x2001020' type='Parallel_Port.av' /><slave name='parallel_port_led2.av' start='0x2001020' end='0x2001028' type='Parallel_Port.av' /><slave name='sysid.control_slave' start='0x2001028' end='0x2001030' type='altera_avalon_sysid_qsys.control_slave' /><slave name='jtag_uart.avalon_jtag_slave' start='0x2001030' end='0x2001038' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
   <parameter name="data_master_high_performance_paddr_base" value="0" />
   <parameter name="data_master_high_performance_paddr_size" value="0" />
   <parameter name="data_master_paddr_base" value="0" />
@@ -244,7 +303,7 @@
   <parameter name="instruction_master_high_performance_paddr_size" value="0" />
   <parameter name="instruction_master_paddr_base" value="0" />
   <parameter name="instruction_master_paddr_size" value="0" />
-  <parameter name="internalIrqMaskSystemInfo" value="1" />
+  <parameter name="internalIrqMaskSystemInfo" value="15" />
   <parameter name="io_regionbase" value="0" />
   <parameter name="io_regionsize" value="0" />
   <parameter name="master_addr_map" value="false" />
@@ -523,7 +582,6 @@
   <parameter name="WIDTH_CLOCK" value="5" />
   <parameter name="WIDTH_PHASECOUNTERSELECT" value="" />
  </module>
- <module name="Parallel_Port_0" kind="Parallel_Port" version="1.0" enabled="1" />
  <module
    name="SDRAM_ctrl"
    kind="altera_avalon_new_sdram_controller"
@@ -579,6 +637,21 @@
   <parameter name="writeIRQThreshold" value="8" />
  </module>
  <module
+   name="parallel_port_buttons"
+   kind="Parallel_Port"
+   version="1.0"
+   enabled="1" />
+ <module
+   name="parallel_port_led2"
+   kind="Parallel_Port"
+   version="1.0"
+   enabled="1" />
+ <module
+   name="parallel_port_led3"
+   kind="Parallel_Port"
+   version="1.0"
+   enabled="1" />
+ <module
    name="sysid"
    kind="altera_avalon_sysid_qsys"
    version="18.1"
@@ -589,7 +662,7 @@
    kind="avalon"
    version="18.1"
    start="CPU.data_master"
-   end="jtag_uart.avalon_jtag_slave">
+   end="parallel_port_led2.av">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x02001020" />
   <parameter name="defaultConnection" value="false" />
@@ -598,7 +671,16 @@
    kind="avalon"
    version="18.1"
    start="CPU.data_master"
-   end="Parallel_Port_0.avalon_slave">
+   end="parallel_port_led3.av">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x02001018" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="CPU.data_master"
+   end="parallel_port_buttons.av">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x02001010" />
   <parameter name="defaultConnection" value="false" />
@@ -607,9 +689,18 @@
    kind="avalon"
    version="18.1"
    start="CPU.data_master"
+   end="jtag_uart.avalon_jtag_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x02001030" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="CPU.data_master"
    end="sysid.control_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x02001018" />
+  <parameter name="baseAddress" value="0x02001028" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -665,14 +756,45 @@
    kind="clock"
    version="18.1"
    start="PLL.c0"
-   end="Parallel_Port_0.clock_sink" />
+   end="parallel_port_led2.clock" />
+ <connection
+   kind="clock"
+   version="18.1"
+   start="PLL.c0"
+   end="parallel_port_led3.clock" />
+ <connection
+   kind="clock"
+   version="18.1"
+   start="PLL.c0"
+   end="parallel_port_buttons.clock" />
  <connection
    kind="clock"
    version="18.1"
    start="clk_0.clk"
    end="PLL.inclk_interface" />
- <connection kind="interrupt" version="18.1" start="CPU.irq" end="jtag_uart.irq">
+ <connection
+   kind="interrupt"
+   version="18.1"
+   start="CPU.irq"
+   end="parallel_port_led2.interrupt_sender">
   <parameter name="irqNumber" value="0" />
+ </connection>
+ <connection
+   kind="interrupt"
+   version="18.1"
+   start="CPU.irq"
+   end="parallel_port_led3.interrupt_sender">
+  <parameter name="irqNumber" value="2" />
+ </connection>
+ <connection
+   kind="interrupt"
+   version="18.1"
+   start="CPU.irq"
+   end="parallel_port_buttons.interrupt_sender">
+  <parameter name="irqNumber" value="3" />
+ </connection>
+ <connection kind="interrupt" version="18.1" start="CPU.irq" end="jtag_uart.irq">
+  <parameter name="irqNumber" value="1" />
  </connection>
  <connection
    kind="reset"
@@ -690,7 +812,17 @@
    kind="reset"
    version="18.1"
    start="clk_0.clk_reset"
-   end="Parallel_Port_0.reset_sink" />
+   end="parallel_port_led2.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="parallel_port_led3.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="parallel_port_buttons.reset" />
  <connection
    kind="reset"
    version="18.1"
@@ -720,7 +852,17 @@
    kind="reset"
    version="18.1"
    start="CPU.debug_reset_request"
-   end="Parallel_Port_0.reset_sink" />
+   end="parallel_port_buttons.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="CPU.debug_reset_request"
+   end="parallel_port_led2.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="CPU.debug_reset_request"
+   end="parallel_port_led3.reset" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.enableEccProtection" value="FALSE" />
  <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />

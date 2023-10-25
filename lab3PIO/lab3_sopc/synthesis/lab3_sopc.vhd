@@ -8,8 +8,10 @@ use IEEE.numeric_std.all;
 
 entity lab3_sopc is
 	port (
+		buttons_export        : inout std_logic_vector(7 downto 0)  := (others => '0'); --         buttons.export
 		clk_clk               : in    std_logic                     := '0';             --             clk.clk
-		pio_port_export       : inout std_logic_vector(7 downto 0)  := (others => '0'); --        pio_port.export
+		led_row2_export       : inout std_logic_vector(7 downto 0)  := (others => '0'); --        led_row2.export
+		led_row3_export       : inout std_logic_vector(7 downto 0)  := (others => '0'); --        led_row3.export
 		reset_reset_n         : in    std_logic                     := '0';             --           reset.reset_n
 		sdram_clk_clk         : out   std_logic;                                        --       sdram_clk.clk
 		sdram_ctrl_wire_addr  : out   std_logic_vector(11 downto 0);                    -- sdram_ctrl_wire.addr
@@ -84,19 +86,6 @@ architecture rtl of lab3_sopc is
 		);
 	end component lab3_sopc_PLL;
 
-	component SimplePIO is
-		port (
-			ParPort_DIO  : inout std_logic_vector(7 downto 0) := (others => 'X'); -- export
-			Reset_RLI    : in    std_logic                    := 'X';             -- reset_n
-			Address_DI   : in    std_logic_vector(2 downto 0) := (others => 'X'); -- address
-			Read_SI      : in    std_logic                    := 'X';             -- read
-			WriteData_DI : in    std_logic_vector(7 downto 0) := (others => 'X'); -- writedata
-			ReadData_DO  : out   std_logic_vector(7 downto 0);                    -- readdata
-			Write_SI     : in    std_logic                    := 'X';             -- write
-			Clk_CI       : in    std_logic                    := 'X'              -- clk
-		);
-	end component SimplePIO;
-
 	component lab3_sopc_SDRAM_ctrl is
 		port (
 			clk            : in    std_logic                     := 'X';             -- clk
@@ -136,6 +125,20 @@ architecture rtl of lab3_sopc is
 			av_irq         : out std_logic                                         -- irq
 		);
 	end component lab3_sopc_jtag_uart;
+
+	component simplePIO is
+		port (
+			irq          : out   std_logic;                                       -- irq
+			av_address   : in    std_logic_vector(2 downto 0) := (others => 'X'); -- address
+			av_read      : in    std_logic                    := 'X';             -- read
+			av_readdata  : out   std_logic_vector(7 downto 0);                    -- readdata
+			av_write     : in    std_logic                    := 'X';             -- write
+			av_writedata : in    std_logic_vector(7 downto 0) := (others => 'X'); -- writedata
+			conduit_data : inout std_logic_vector(7 downto 0) := (others => 'X'); -- export
+			clk          : in    std_logic                    := 'X';             -- clk
+			reset_n      : in    std_logic                    := 'X'              -- reset_n
+		);
+	end component simplePIO;
 
 	component lab3_sopc_sysid is
 		port (
@@ -182,11 +185,21 @@ architecture rtl of lab3_sopc is
 			jtag_uart_avalon_jtag_slave_writedata                 : out std_logic_vector(31 downto 0);                    -- writedata
 			jtag_uart_avalon_jtag_slave_waitrequest               : in  std_logic                     := 'X';             -- waitrequest
 			jtag_uart_avalon_jtag_slave_chipselect                : out std_logic;                                        -- chipselect
-			Parallel_Port_0_avalon_slave_address                  : out std_logic_vector(2 downto 0);                     -- address
-			Parallel_Port_0_avalon_slave_write                    : out std_logic;                                        -- write
-			Parallel_Port_0_avalon_slave_read                     : out std_logic;                                        -- read
-			Parallel_Port_0_avalon_slave_readdata                 : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- readdata
-			Parallel_Port_0_avalon_slave_writedata                : out std_logic_vector(7 downto 0);                     -- writedata
+			parallel_port_buttons_av_address                      : out std_logic_vector(2 downto 0);                     -- address
+			parallel_port_buttons_av_write                        : out std_logic;                                        -- write
+			parallel_port_buttons_av_read                         : out std_logic;                                        -- read
+			parallel_port_buttons_av_readdata                     : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- readdata
+			parallel_port_buttons_av_writedata                    : out std_logic_vector(7 downto 0);                     -- writedata
+			parallel_port_led2_av_address                         : out std_logic_vector(2 downto 0);                     -- address
+			parallel_port_led2_av_write                           : out std_logic;                                        -- write
+			parallel_port_led2_av_read                            : out std_logic;                                        -- read
+			parallel_port_led2_av_readdata                        : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- readdata
+			parallel_port_led2_av_writedata                       : out std_logic_vector(7 downto 0);                     -- writedata
+			parallel_port_led3_av_address                         : out std_logic_vector(2 downto 0);                     -- address
+			parallel_port_led3_av_write                           : out std_logic;                                        -- write
+			parallel_port_led3_av_read                            : out std_logic;                                        -- read
+			parallel_port_led3_av_readdata                        : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- readdata
+			parallel_port_led3_av_writedata                       : out std_logic_vector(7 downto 0);                     -- writedata
 			PLL_pll_slave_address                                 : out std_logic_vector(1 downto 0);                     -- address
 			PLL_pll_slave_write                                   : out std_logic;                                        -- write
 			PLL_pll_slave_read                                    : out std_logic;                                        -- read
@@ -211,6 +224,9 @@ architecture rtl of lab3_sopc is
 			clk           : in  std_logic                     := 'X'; -- clk
 			reset         : in  std_logic                     := 'X'; -- reset
 			receiver0_irq : in  std_logic                     := 'X'; -- irq
+			receiver1_irq : in  std_logic                     := 'X'; -- irq
+			receiver2_irq : in  std_logic                     := 'X'; -- irq
+			receiver3_irq : in  std_logic                     := 'X'; -- irq
 			sender_irq    : out std_logic_vector(31 downto 0)         -- irq
 		);
 	end component lab3_sopc_irq_mapper;
@@ -347,7 +363,7 @@ architecture rtl of lab3_sopc is
 		);
 	end component lab3_sopc_rst_controller_001;
 
-	signal pll_c0_clk                                                    : std_logic;                     -- PLL:c0 -> [CPU:clk, Parallel_Port_0:Clk_CI, SDRAM_ctrl:clk, irq_mapper:clk, jtag_uart:clk, mm_interconnect_0:PLL_c0_clk, rst_controller:clk, sysid:clock]
+	signal pll_c0_clk                                                    : std_logic;                     -- PLL:c0 -> [CPU:clk, SDRAM_ctrl:clk, irq_mapper:clk, jtag_uart:clk, mm_interconnect_0:PLL_c0_clk, parallel_port_buttons:clk, parallel_port_led2:clk, parallel_port_led3:clk, rst_controller:clk, sysid:clock]
 	signal cpu_debug_reset_request_reset                                 : std_logic;                     -- CPU:debug_reset_request -> [cpu_debug_reset_request_reset:in, mm_interconnect_0:jtag_uart_reset_reset_bridge_in_reset_reset, rst_controller:reset_in1, rst_controller_001:reset_in1]
 	signal cpu_data_master_readdata                                      : std_logic_vector(31 downto 0); -- mm_interconnect_0:CPU_data_master_readdata -> CPU:d_readdata
 	signal cpu_data_master_waitrequest                                   : std_logic;                     -- mm_interconnect_0:CPU_data_master_waitrequest -> CPU:d_waitrequest
@@ -363,6 +379,21 @@ architecture rtl of lab3_sopc is
 	signal cpu_instruction_master_address                                : std_logic_vector(25 downto 0); -- CPU:i_address -> mm_interconnect_0:CPU_instruction_master_address
 	signal cpu_instruction_master_read                                   : std_logic;                     -- CPU:i_read -> mm_interconnect_0:CPU_instruction_master_read
 	signal cpu_instruction_master_readdatavalid                          : std_logic;                     -- mm_interconnect_0:CPU_instruction_master_readdatavalid -> CPU:i_readdatavalid
+	signal mm_interconnect_0_parallel_port_led2_av_readdata              : std_logic_vector(7 downto 0);  -- parallel_port_led2:av_readdata -> mm_interconnect_0:parallel_port_led2_av_readdata
+	signal mm_interconnect_0_parallel_port_led2_av_address               : std_logic_vector(2 downto 0);  -- mm_interconnect_0:parallel_port_led2_av_address -> parallel_port_led2:av_address
+	signal mm_interconnect_0_parallel_port_led2_av_read                  : std_logic;                     -- mm_interconnect_0:parallel_port_led2_av_read -> parallel_port_led2:av_read
+	signal mm_interconnect_0_parallel_port_led2_av_write                 : std_logic;                     -- mm_interconnect_0:parallel_port_led2_av_write -> parallel_port_led2:av_write
+	signal mm_interconnect_0_parallel_port_led2_av_writedata             : std_logic_vector(7 downto 0);  -- mm_interconnect_0:parallel_port_led2_av_writedata -> parallel_port_led2:av_writedata
+	signal mm_interconnect_0_parallel_port_led3_av_readdata              : std_logic_vector(7 downto 0);  -- parallel_port_led3:av_readdata -> mm_interconnect_0:parallel_port_led3_av_readdata
+	signal mm_interconnect_0_parallel_port_led3_av_address               : std_logic_vector(2 downto 0);  -- mm_interconnect_0:parallel_port_led3_av_address -> parallel_port_led3:av_address
+	signal mm_interconnect_0_parallel_port_led3_av_read                  : std_logic;                     -- mm_interconnect_0:parallel_port_led3_av_read -> parallel_port_led3:av_read
+	signal mm_interconnect_0_parallel_port_led3_av_write                 : std_logic;                     -- mm_interconnect_0:parallel_port_led3_av_write -> parallel_port_led3:av_write
+	signal mm_interconnect_0_parallel_port_led3_av_writedata             : std_logic_vector(7 downto 0);  -- mm_interconnect_0:parallel_port_led3_av_writedata -> parallel_port_led3:av_writedata
+	signal mm_interconnect_0_parallel_port_buttons_av_readdata           : std_logic_vector(7 downto 0);  -- parallel_port_buttons:av_readdata -> mm_interconnect_0:parallel_port_buttons_av_readdata
+	signal mm_interconnect_0_parallel_port_buttons_av_address            : std_logic_vector(2 downto 0);  -- mm_interconnect_0:parallel_port_buttons_av_address -> parallel_port_buttons:av_address
+	signal mm_interconnect_0_parallel_port_buttons_av_read               : std_logic;                     -- mm_interconnect_0:parallel_port_buttons_av_read -> parallel_port_buttons:av_read
+	signal mm_interconnect_0_parallel_port_buttons_av_write              : std_logic;                     -- mm_interconnect_0:parallel_port_buttons_av_write -> parallel_port_buttons:av_write
+	signal mm_interconnect_0_parallel_port_buttons_av_writedata          : std_logic_vector(7 downto 0);  -- mm_interconnect_0:parallel_port_buttons_av_writedata -> parallel_port_buttons:av_writedata
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect      : std_logic;                     -- mm_interconnect_0:jtag_uart_avalon_jtag_slave_chipselect -> jtag_uart:av_chipselect
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_readdata        : std_logic_vector(31 downto 0); -- jtag_uart:av_readdata -> mm_interconnect_0:jtag_uart_avalon_jtag_slave_readdata
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest     : std_logic;                     -- jtag_uart:av_waitrequest -> mm_interconnect_0:jtag_uart_avalon_jtag_slave_waitrequest
@@ -370,11 +401,6 @@ architecture rtl of lab3_sopc is
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_read            : std_logic;                     -- mm_interconnect_0:jtag_uart_avalon_jtag_slave_read -> mm_interconnect_0_jtag_uart_avalon_jtag_slave_read:in
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_write           : std_logic;                     -- mm_interconnect_0:jtag_uart_avalon_jtag_slave_write -> mm_interconnect_0_jtag_uart_avalon_jtag_slave_write:in
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata       : std_logic_vector(31 downto 0); -- mm_interconnect_0:jtag_uart_avalon_jtag_slave_writedata -> jtag_uart:av_writedata
-	signal mm_interconnect_0_parallel_port_0_avalon_slave_readdata       : std_logic_vector(7 downto 0);  -- Parallel_Port_0:ReadData_DO -> mm_interconnect_0:Parallel_Port_0_avalon_slave_readdata
-	signal mm_interconnect_0_parallel_port_0_avalon_slave_address        : std_logic_vector(2 downto 0);  -- mm_interconnect_0:Parallel_Port_0_avalon_slave_address -> Parallel_Port_0:Address_DI
-	signal mm_interconnect_0_parallel_port_0_avalon_slave_read           : std_logic;                     -- mm_interconnect_0:Parallel_Port_0_avalon_slave_read -> Parallel_Port_0:Read_SI
-	signal mm_interconnect_0_parallel_port_0_avalon_slave_write          : std_logic;                     -- mm_interconnect_0:Parallel_Port_0_avalon_slave_write -> Parallel_Port_0:Write_SI
-	signal mm_interconnect_0_parallel_port_0_avalon_slave_writedata      : std_logic_vector(7 downto 0);  -- mm_interconnect_0:Parallel_Port_0_avalon_slave_writedata -> Parallel_Port_0:WriteData_DI
 	signal mm_interconnect_0_sysid_control_slave_readdata                : std_logic_vector(31 downto 0); -- sysid:readdata -> mm_interconnect_0:sysid_control_slave_readdata
 	signal mm_interconnect_0_sysid_control_slave_address                 : std_logic_vector(0 downto 0);  -- mm_interconnect_0:sysid_control_slave_address -> sysid:address
 	signal mm_interconnect_0_cpu_debug_mem_slave_readdata                : std_logic_vector(31 downto 0); -- CPU:debug_mem_slave_readdata -> mm_interconnect_0:CPU_debug_mem_slave_readdata
@@ -399,7 +425,10 @@ architecture rtl of lab3_sopc is
 	signal mm_interconnect_0_sdram_ctrl_s1_readdatavalid                 : std_logic;                     -- SDRAM_ctrl:za_valid -> mm_interconnect_0:SDRAM_ctrl_s1_readdatavalid
 	signal mm_interconnect_0_sdram_ctrl_s1_write                         : std_logic;                     -- mm_interconnect_0:SDRAM_ctrl_s1_write -> mm_interconnect_0_sdram_ctrl_s1_write:in
 	signal mm_interconnect_0_sdram_ctrl_s1_writedata                     : std_logic_vector(15 downto 0); -- mm_interconnect_0:SDRAM_ctrl_s1_writedata -> SDRAM_ctrl:az_data
-	signal irq_mapper_receiver0_irq                                      : std_logic;                     -- jtag_uart:av_irq -> irq_mapper:receiver0_irq
+	signal irq_mapper_receiver0_irq                                      : std_logic;                     -- parallel_port_led2:irq -> irq_mapper:receiver0_irq
+	signal irq_mapper_receiver1_irq                                      : std_logic;                     -- parallel_port_led3:irq -> irq_mapper:receiver1_irq
+	signal irq_mapper_receiver2_irq                                      : std_logic;                     -- parallel_port_buttons:irq -> irq_mapper:receiver2_irq
+	signal irq_mapper_receiver3_irq                                      : std_logic;                     -- jtag_uart:av_irq -> irq_mapper:receiver3_irq
 	signal cpu_irq_irq                                                   : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> CPU:irq
 	signal rst_controller_reset_out_reset                                : std_logic;                     -- rst_controller:reset_out -> [irq_mapper:reset, mm_interconnect_0:CPU_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
 	signal rst_controller_reset_out_reset_req                            : std_logic;                     -- rst_controller:reset_req -> [CPU:reset_req, rst_translator:reset_req_in]
@@ -411,7 +440,7 @@ architecture rtl of lab3_sopc is
 	signal mm_interconnect_0_sdram_ctrl_s1_read_ports_inv                : std_logic;                     -- mm_interconnect_0_sdram_ctrl_s1_read:inv -> SDRAM_ctrl:az_rd_n
 	signal mm_interconnect_0_sdram_ctrl_s1_byteenable_ports_inv          : std_logic_vector(1 downto 0);  -- mm_interconnect_0_sdram_ctrl_s1_byteenable:inv -> SDRAM_ctrl:az_be_n
 	signal mm_interconnect_0_sdram_ctrl_s1_write_ports_inv               : std_logic;                     -- mm_interconnect_0_sdram_ctrl_s1_write:inv -> SDRAM_ctrl:az_wr_n
-	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                     -- rst_controller_reset_out_reset:inv -> [CPU:reset_n, Parallel_Port_0:Reset_RLI, SDRAM_ctrl:reset_n, sysid:reset_n]
+	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                     -- rst_controller_reset_out_reset:inv -> [CPU:reset_n, SDRAM_ctrl:reset_n, parallel_port_buttons:reset_n, parallel_port_led2:reset_n, parallel_port_led3:reset_n, sysid:reset_n]
 
 begin
 
@@ -472,18 +501,6 @@ begin
 			configupdate       => '0'                                        --           (terminated)
 		);
 
-	parallel_port_0 : component SimplePIO
-		port map (
-			ParPort_DIO  => pio_port_export,                                          --  conduit_end.export
-			Reset_RLI    => rst_controller_reset_out_reset_ports_inv,                 --   reset_sink.reset_n
-			Address_DI   => mm_interconnect_0_parallel_port_0_avalon_slave_address,   -- avalon_slave.address
-			Read_SI      => mm_interconnect_0_parallel_port_0_avalon_slave_read,      --             .read
-			WriteData_DI => mm_interconnect_0_parallel_port_0_avalon_slave_writedata, --             .writedata
-			ReadData_DO  => mm_interconnect_0_parallel_port_0_avalon_slave_readdata,  --             .readdata
-			Write_SI     => mm_interconnect_0_parallel_port_0_avalon_slave_write,     --             .write
-			Clk_CI       => pll_c0_clk                                                --   clock_sink.clk
-		);
-
 	sdram_ctrl : component lab3_sopc_SDRAM_ctrl
 		port map (
 			clk            => pll_c0_clk,                                           --   clk.clk
@@ -519,7 +536,46 @@ begin
 			av_write_n     => mm_interconnect_0_jtag_uart_avalon_jtag_slave_write_ports_inv, --                  .write_n
 			av_writedata   => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,       --                  .writedata
 			av_waitrequest => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest,     --                  .waitrequest
-			av_irq         => irq_mapper_receiver0_irq                                       --               irq.irq
+			av_irq         => irq_mapper_receiver3_irq                                       --               irq.irq
+		);
+
+	parallel_port_buttons : component simplePIO
+		port map (
+			irq          => irq_mapper_receiver2_irq,                             -- interrupt_sender.irq
+			av_address   => mm_interconnect_0_parallel_port_buttons_av_address,   --               av.address
+			av_read      => mm_interconnect_0_parallel_port_buttons_av_read,      --                 .read
+			av_readdata  => mm_interconnect_0_parallel_port_buttons_av_readdata,  --                 .readdata
+			av_write     => mm_interconnect_0_parallel_port_buttons_av_write,     --                 .write
+			av_writedata => mm_interconnect_0_parallel_port_buttons_av_writedata, --                 .writedata
+			conduit_data => buttons_export,                                       --         pio_port.export
+			clk          => pll_c0_clk,                                           --            clock.clk
+			reset_n      => rst_controller_reset_out_reset_ports_inv              --            reset.reset_n
+		);
+
+	parallel_port_led2 : component simplePIO
+		port map (
+			irq          => irq_mapper_receiver0_irq,                          -- interrupt_sender.irq
+			av_address   => mm_interconnect_0_parallel_port_led2_av_address,   --               av.address
+			av_read      => mm_interconnect_0_parallel_port_led2_av_read,      --                 .read
+			av_readdata  => mm_interconnect_0_parallel_port_led2_av_readdata,  --                 .readdata
+			av_write     => mm_interconnect_0_parallel_port_led2_av_write,     --                 .write
+			av_writedata => mm_interconnect_0_parallel_port_led2_av_writedata, --                 .writedata
+			conduit_data => led_row2_export,                                   --         pio_port.export
+			clk          => pll_c0_clk,                                        --            clock.clk
+			reset_n      => rst_controller_reset_out_reset_ports_inv           --            reset.reset_n
+		);
+
+	parallel_port_led3 : component simplePIO
+		port map (
+			irq          => irq_mapper_receiver1_irq,                          -- interrupt_sender.irq
+			av_address   => mm_interconnect_0_parallel_port_led3_av_address,   --               av.address
+			av_read      => mm_interconnect_0_parallel_port_led3_av_read,      --                 .read
+			av_readdata  => mm_interconnect_0_parallel_port_led3_av_readdata,  --                 .readdata
+			av_write     => mm_interconnect_0_parallel_port_led3_av_write,     --                 .write
+			av_writedata => mm_interconnect_0_parallel_port_led3_av_writedata, --                 .writedata
+			conduit_data => led_row3_export,                                   --         pio_port.export
+			clk          => pll_c0_clk,                                        --            clock.clk
+			reset_n      => rst_controller_reset_out_reset_ports_inv           --            reset.reset_n
 		);
 
 	sysid : component lab3_sopc_sysid
@@ -566,11 +622,21 @@ begin
 			jtag_uart_avalon_jtag_slave_writedata                 => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,   --                                                .writedata
 			jtag_uart_avalon_jtag_slave_waitrequest               => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest, --                                                .waitrequest
 			jtag_uart_avalon_jtag_slave_chipselect                => mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect,  --                                                .chipselect
-			Parallel_Port_0_avalon_slave_address                  => mm_interconnect_0_parallel_port_0_avalon_slave_address,    --                    Parallel_Port_0_avalon_slave.address
-			Parallel_Port_0_avalon_slave_write                    => mm_interconnect_0_parallel_port_0_avalon_slave_write,      --                                                .write
-			Parallel_Port_0_avalon_slave_read                     => mm_interconnect_0_parallel_port_0_avalon_slave_read,       --                                                .read
-			Parallel_Port_0_avalon_slave_readdata                 => mm_interconnect_0_parallel_port_0_avalon_slave_readdata,   --                                                .readdata
-			Parallel_Port_0_avalon_slave_writedata                => mm_interconnect_0_parallel_port_0_avalon_slave_writedata,  --                                                .writedata
+			parallel_port_buttons_av_address                      => mm_interconnect_0_parallel_port_buttons_av_address,        --                        parallel_port_buttons_av.address
+			parallel_port_buttons_av_write                        => mm_interconnect_0_parallel_port_buttons_av_write,          --                                                .write
+			parallel_port_buttons_av_read                         => mm_interconnect_0_parallel_port_buttons_av_read,           --                                                .read
+			parallel_port_buttons_av_readdata                     => mm_interconnect_0_parallel_port_buttons_av_readdata,       --                                                .readdata
+			parallel_port_buttons_av_writedata                    => mm_interconnect_0_parallel_port_buttons_av_writedata,      --                                                .writedata
+			parallel_port_led2_av_address                         => mm_interconnect_0_parallel_port_led2_av_address,           --                           parallel_port_led2_av.address
+			parallel_port_led2_av_write                           => mm_interconnect_0_parallel_port_led2_av_write,             --                                                .write
+			parallel_port_led2_av_read                            => mm_interconnect_0_parallel_port_led2_av_read,              --                                                .read
+			parallel_port_led2_av_readdata                        => mm_interconnect_0_parallel_port_led2_av_readdata,          --                                                .readdata
+			parallel_port_led2_av_writedata                       => mm_interconnect_0_parallel_port_led2_av_writedata,         --                                                .writedata
+			parallel_port_led3_av_address                         => mm_interconnect_0_parallel_port_led3_av_address,           --                           parallel_port_led3_av.address
+			parallel_port_led3_av_write                           => mm_interconnect_0_parallel_port_led3_av_write,             --                                                .write
+			parallel_port_led3_av_read                            => mm_interconnect_0_parallel_port_led3_av_read,              --                                                .read
+			parallel_port_led3_av_readdata                        => mm_interconnect_0_parallel_port_led3_av_readdata,          --                                                .readdata
+			parallel_port_led3_av_writedata                       => mm_interconnect_0_parallel_port_led3_av_writedata,         --                                                .writedata
 			PLL_pll_slave_address                                 => mm_interconnect_0_pll_pll_slave_address,                   --                                   PLL_pll_slave.address
 			PLL_pll_slave_write                                   => mm_interconnect_0_pll_pll_slave_write,                     --                                                .write
 			PLL_pll_slave_read                                    => mm_interconnect_0_pll_pll_slave_read,                      --                                                .read
@@ -594,6 +660,9 @@ begin
 			clk           => pll_c0_clk,                     --       clk.clk
 			reset         => rst_controller_reset_out_reset, -- clk_reset.reset
 			receiver0_irq => irq_mapper_receiver0_irq,       -- receiver0.irq
+			receiver1_irq => irq_mapper_receiver1_irq,       -- receiver1.irq
+			receiver2_irq => irq_mapper_receiver2_irq,       -- receiver2.irq
+			receiver3_irq => irq_mapper_receiver3_irq,       -- receiver3.irq
 			sender_irq    => cpu_irq_irq                     --    sender.irq
 		);
 
