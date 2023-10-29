@@ -1,0 +1,39 @@
+/*
+ * counter.c
+ *
+ *  Created on: Oct 24, 2023
+ *      Author: Thomas
+ */
+
+
+#include <stdio.h>
+#include "io.h"
+#include "system.h"
+
+#define DELAY 1000000
+
+static void handle_buttonIRQ(void * context, alt_u32 id) __attribute__ ((section(".exceptions")));
+
+int main(void)
+{
+	int counter = 0;
+	unsigned int wait;
+	printf("Lets start counting \n");
+	IOWR_8DIRECT(,0,0xFF);	// set to output (offset 0, all bits to 1 = output)
+
+	while(1)
+	{
+		counter ++;
+		printf("counter = %d \n",counter);
+		IOWR_8DIRECT(PARALLEL_PORT_0_BASE,2,counter);
+		// s i l l y busy wait
+		for(wait = 0; wait < DELAY; wait++)
+			asm volatile ("nop");
+		}
+}
+
+static void handle_buttonIRQ(void * context, alt_u32 id) {
+	unsigned char value = IORD_8DIRECT(PARALLEL_PORT_BUTTONS_BASE, SIMPLEPIO_REGPIN );
+	IOWR_8DIRECT(BUTTON_INPUT_BASE, SIMPLEPIO_CLRIRQ, 3);
+	IOWR_8DIRECT(LED_ROW_3_BASE, SIMPLEPIO_REGPORT, value);
+}

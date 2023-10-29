@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Oct 24, 2023 9:54:22 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1698177262223</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>29.10.2023 16:56:46</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1698595006125</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\git\tsm-emb-hardw\lab3PIO\software\lab3_pio_port_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\lab3_sopc.sopcinfo</SopcDesignFile>
@@ -911,20 +911,32 @@
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>Parallel_Port_0</slaveDescriptor>
+                <slaveDescriptor>parallel_port_led_row3</slaveDescriptor>
                 <addressRange>0x02001010 - 0x02001017</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>sysid</slaveDescriptor>
+                <slaveDescriptor>parallel_port_led_row2</slaveDescriptor>
                 <addressRange>0x02001018 - 0x0200101F</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>jtag_uart</slaveDescriptor>
+                <slaveDescriptor>parallel_port_buttons</slaveDescriptor>
                 <addressRange>0x02001020 - 0x02001027</addressRange>
+                <addressSpan>8</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>sysid</slaveDescriptor>
+                <addressRange>0x02001028 - 0x0200102F</addressRange>
+                <addressSpan>8</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>jtag_uart</slaveDescriptor>
+                <addressRange>0x02001030 - 0x02001037</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>

@@ -1,4 +1,4 @@
 eclipse.preferences.version=1
-newSoftwareExampleWizardPage.defaultLocation=C\:\\git\\tsm-emb-hardw\\lab3PIO\\software\\lab3_pio_port
+newSoftwareExampleWizardPage.defaultLocation=C\:\\git\\tsm-emb-hardw\\lab3PIO\\software\\test
 newSoftwareExampleWizardPage.sopcinfoFile=C\:\\git\\tsm-emb-hardw\\lab3PIO\\lab3_sopc.sopcinfo
-newSoftwareExampleWizardPage2.newBspLocation=C\:\\git\\tsm-emb-hardw\\lab3PIO\\software\\lab3_pio_port_bsp
+newSoftwareExampleWizardPage2.newBspLocation=C\:\\git\\tsm-emb-hardw\\lab3PIO\\software\\test_bsp

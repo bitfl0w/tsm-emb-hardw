@@ -151,71 +151,72 @@ architecture rtl of lab3_sopc is
 
 	component lab3_sopc_mm_interconnect_0 is
 		port (
-			clk_0_clk_clk                                         : in  std_logic                     := 'X';             -- clk
-			PLL_c0_clk                                            : in  std_logic                     := 'X';             -- clk
-			CPU_reset_reset_bridge_in_reset_reset                 : in  std_logic                     := 'X';             -- reset
-			jtag_uart_reset_reset_bridge_in_reset_reset           : in  std_logic                     := 'X';             -- reset
-			PLL_inclk_interface_reset_reset_bridge_in_reset_reset : in  std_logic                     := 'X';             -- reset
-			CPU_data_master_address                               : in  std_logic_vector(25 downto 0) := (others => 'X'); -- address
-			CPU_data_master_waitrequest                           : out std_logic;                                        -- waitrequest
-			CPU_data_master_byteenable                            : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
-			CPU_data_master_read                                  : in  std_logic                     := 'X';             -- read
-			CPU_data_master_readdata                              : out std_logic_vector(31 downto 0);                    -- readdata
-			CPU_data_master_readdatavalid                         : out std_logic;                                        -- readdatavalid
-			CPU_data_master_write                                 : in  std_logic                     := 'X';             -- write
-			CPU_data_master_writedata                             : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
-			CPU_data_master_debugaccess                           : in  std_logic                     := 'X';             -- debugaccess
-			CPU_instruction_master_address                        : in  std_logic_vector(25 downto 0) := (others => 'X'); -- address
-			CPU_instruction_master_waitrequest                    : out std_logic;                                        -- waitrequest
-			CPU_instruction_master_read                           : in  std_logic                     := 'X';             -- read
-			CPU_instruction_master_readdata                       : out std_logic_vector(31 downto 0);                    -- readdata
-			CPU_instruction_master_readdatavalid                  : out std_logic;                                        -- readdatavalid
-			CPU_debug_mem_slave_address                           : out std_logic_vector(8 downto 0);                     -- address
-			CPU_debug_mem_slave_write                             : out std_logic;                                        -- write
-			CPU_debug_mem_slave_read                              : out std_logic;                                        -- read
-			CPU_debug_mem_slave_readdata                          : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
-			CPU_debug_mem_slave_writedata                         : out std_logic_vector(31 downto 0);                    -- writedata
-			CPU_debug_mem_slave_byteenable                        : out std_logic_vector(3 downto 0);                     -- byteenable
-			CPU_debug_mem_slave_waitrequest                       : in  std_logic                     := 'X';             -- waitrequest
-			CPU_debug_mem_slave_debugaccess                       : out std_logic;                                        -- debugaccess
-			jtag_uart_avalon_jtag_slave_address                   : out std_logic_vector(0 downto 0);                     -- address
-			jtag_uart_avalon_jtag_slave_write                     : out std_logic;                                        -- write
-			jtag_uart_avalon_jtag_slave_read                      : out std_logic;                                        -- read
-			jtag_uart_avalon_jtag_slave_readdata                  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
-			jtag_uart_avalon_jtag_slave_writedata                 : out std_logic_vector(31 downto 0);                    -- writedata
-			jtag_uart_avalon_jtag_slave_waitrequest               : in  std_logic                     := 'X';             -- waitrequest
-			jtag_uart_avalon_jtag_slave_chipselect                : out std_logic;                                        -- chipselect
-			parallel_port_buttons_av_address                      : out std_logic_vector(2 downto 0);                     -- address
-			parallel_port_buttons_av_write                        : out std_logic;                                        -- write
-			parallel_port_buttons_av_read                         : out std_logic;                                        -- read
-			parallel_port_buttons_av_readdata                     : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- readdata
-			parallel_port_buttons_av_writedata                    : out std_logic_vector(7 downto 0);                     -- writedata
-			parallel_port_led2_av_address                         : out std_logic_vector(2 downto 0);                     -- address
-			parallel_port_led2_av_write                           : out std_logic;                                        -- write
-			parallel_port_led2_av_read                            : out std_logic;                                        -- read
-			parallel_port_led2_av_readdata                        : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- readdata
-			parallel_port_led2_av_writedata                       : out std_logic_vector(7 downto 0);                     -- writedata
-			parallel_port_led3_av_address                         : out std_logic_vector(2 downto 0);                     -- address
-			parallel_port_led3_av_write                           : out std_logic;                                        -- write
-			parallel_port_led3_av_read                            : out std_logic;                                        -- read
-			parallel_port_led3_av_readdata                        : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- readdata
-			parallel_port_led3_av_writedata                       : out std_logic_vector(7 downto 0);                     -- writedata
-			PLL_pll_slave_address                                 : out std_logic_vector(1 downto 0);                     -- address
-			PLL_pll_slave_write                                   : out std_logic;                                        -- write
-			PLL_pll_slave_read                                    : out std_logic;                                        -- read
-			PLL_pll_slave_readdata                                : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
-			PLL_pll_slave_writedata                               : out std_logic_vector(31 downto 0);                    -- writedata
-			SDRAM_ctrl_s1_address                                 : out std_logic_vector(22 downto 0);                    -- address
-			SDRAM_ctrl_s1_write                                   : out std_logic;                                        -- write
-			SDRAM_ctrl_s1_read                                    : out std_logic;                                        -- read
-			SDRAM_ctrl_s1_readdata                                : in  std_logic_vector(15 downto 0) := (others => 'X'); -- readdata
-			SDRAM_ctrl_s1_writedata                               : out std_logic_vector(15 downto 0);                    -- writedata
-			SDRAM_ctrl_s1_byteenable                              : out std_logic_vector(1 downto 0);                     -- byteenable
-			SDRAM_ctrl_s1_readdatavalid                           : in  std_logic                     := 'X';             -- readdatavalid
-			SDRAM_ctrl_s1_waitrequest                             : in  std_logic                     := 'X';             -- waitrequest
-			SDRAM_ctrl_s1_chipselect                              : out std_logic;                                        -- chipselect
-			sysid_control_slave_address                           : out std_logic_vector(0 downto 0);                     -- address
-			sysid_control_slave_readdata                          : in  std_logic_vector(31 downto 0) := (others => 'X')  -- readdata
+			clk_0_clk_clk                                           : in  std_logic                     := 'X';             -- clk
+			PLL_c0_clk                                              : in  std_logic                     := 'X';             -- clk
+			CPU_reset_reset_bridge_in_reset_reset                   : in  std_logic                     := 'X';             -- reset
+			jtag_uart_reset_reset_bridge_in_reset_reset             : in  std_logic                     := 'X';             -- reset
+			parallel_port_buttons_reset_reset_bridge_in_reset_reset : in  std_logic                     := 'X';             -- reset
+			PLL_inclk_interface_reset_reset_bridge_in_reset_reset   : in  std_logic                     := 'X';             -- reset
+			CPU_data_master_address                                 : in  std_logic_vector(25 downto 0) := (others => 'X'); -- address
+			CPU_data_master_waitrequest                             : out std_logic;                                        -- waitrequest
+			CPU_data_master_byteenable                              : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
+			CPU_data_master_read                                    : in  std_logic                     := 'X';             -- read
+			CPU_data_master_readdata                                : out std_logic_vector(31 downto 0);                    -- readdata
+			CPU_data_master_readdatavalid                           : out std_logic;                                        -- readdatavalid
+			CPU_data_master_write                                   : in  std_logic                     := 'X';             -- write
+			CPU_data_master_writedata                               : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			CPU_data_master_debugaccess                             : in  std_logic                     := 'X';             -- debugaccess
+			CPU_instruction_master_address                          : in  std_logic_vector(25 downto 0) := (others => 'X'); -- address
+			CPU_instruction_master_waitrequest                      : out std_logic;                                        -- waitrequest
+			CPU_instruction_master_read                             : in  std_logic                     := 'X';             -- read
+			CPU_instruction_master_readdata                         : out std_logic_vector(31 downto 0);                    -- readdata
+			CPU_instruction_master_readdatavalid                    : out std_logic;                                        -- readdatavalid
+			CPU_debug_mem_slave_address                             : out std_logic_vector(8 downto 0);                     -- address
+			CPU_debug_mem_slave_write                               : out std_logic;                                        -- write
+			CPU_debug_mem_slave_read                                : out std_logic;                                        -- read
+			CPU_debug_mem_slave_readdata                            : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			CPU_debug_mem_slave_writedata                           : out std_logic_vector(31 downto 0);                    -- writedata
+			CPU_debug_mem_slave_byteenable                          : out std_logic_vector(3 downto 0);                     -- byteenable
+			CPU_debug_mem_slave_waitrequest                         : in  std_logic                     := 'X';             -- waitrequest
+			CPU_debug_mem_slave_debugaccess                         : out std_logic;                                        -- debugaccess
+			jtag_uart_avalon_jtag_slave_address                     : out std_logic_vector(0 downto 0);                     -- address
+			jtag_uart_avalon_jtag_slave_write                       : out std_logic;                                        -- write
+			jtag_uart_avalon_jtag_slave_read                        : out std_logic;                                        -- read
+			jtag_uart_avalon_jtag_slave_readdata                    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			jtag_uart_avalon_jtag_slave_writedata                   : out std_logic_vector(31 downto 0);                    -- writedata
+			jtag_uart_avalon_jtag_slave_waitrequest                 : in  std_logic                     := 'X';             -- waitrequest
+			jtag_uart_avalon_jtag_slave_chipselect                  : out std_logic;                                        -- chipselect
+			parallel_port_buttons_av_address                        : out std_logic_vector(2 downto 0);                     -- address
+			parallel_port_buttons_av_write                          : out std_logic;                                        -- write
+			parallel_port_buttons_av_read                           : out std_logic;                                        -- read
+			parallel_port_buttons_av_readdata                       : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- readdata
+			parallel_port_buttons_av_writedata                      : out std_logic_vector(7 downto 0);                     -- writedata
+			parallel_port_led_row2_av_address                       : out std_logic_vector(2 downto 0);                     -- address
+			parallel_port_led_row2_av_write                         : out std_logic;                                        -- write
+			parallel_port_led_row2_av_read                          : out std_logic;                                        -- read
+			parallel_port_led_row2_av_readdata                      : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- readdata
+			parallel_port_led_row2_av_writedata                     : out std_logic_vector(7 downto 0);                     -- writedata
+			parallel_port_led_row3_av_address                       : out std_logic_vector(2 downto 0);                     -- address
+			parallel_port_led_row3_av_write                         : out std_logic;                                        -- write
+			parallel_port_led_row3_av_read                          : out std_logic;                                        -- read
+			parallel_port_led_row3_av_readdata                      : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- readdata
+			parallel_port_led_row3_av_writedata                     : out std_logic_vector(7 downto 0);                     -- writedata
+			PLL_pll_slave_address                                   : out std_logic_vector(1 downto 0);                     -- address
+			PLL_pll_slave_write                                     : out std_logic;                                        -- write
+			PLL_pll_slave_read                                      : out std_logic;                                        -- read
+			PLL_pll_slave_readdata                                  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			PLL_pll_slave_writedata                                 : out std_logic_vector(31 downto 0);                    -- writedata
+			SDRAM_ctrl_s1_address                                   : out std_logic_vector(22 downto 0);                    -- address
+			SDRAM_ctrl_s1_write                                     : out std_logic;                                        -- write
+			SDRAM_ctrl_s1_read                                      : out std_logic;                                        -- read
+			SDRAM_ctrl_s1_readdata                                  : in  std_logic_vector(15 downto 0) := (others => 'X'); -- readdata
+			SDRAM_ctrl_s1_writedata                                 : out std_logic_vector(15 downto 0);                    -- writedata
+			SDRAM_ctrl_s1_byteenable                                : out std_logic_vector(1 downto 0);                     -- byteenable
+			SDRAM_ctrl_s1_readdatavalid                             : in  std_logic                     := 'X';             -- readdatavalid
+			SDRAM_ctrl_s1_waitrequest                               : in  std_logic                     := 'X';             -- waitrequest
+			SDRAM_ctrl_s1_chipselect                                : out std_logic;                                        -- chipselect
+			sysid_control_slave_address                             : out std_logic_vector(0 downto 0);                     -- address
+			sysid_control_slave_readdata                            : in  std_logic_vector(31 downto 0) := (others => 'X')  -- readdata
 		);
 	end component lab3_sopc_mm_interconnect_0;
 
@@ -363,7 +364,73 @@ architecture rtl of lab3_sopc is
 		);
 	end component lab3_sopc_rst_controller_001;
 
-	signal pll_c0_clk                                                    : std_logic;                     -- PLL:c0 -> [CPU:clk, SDRAM_ctrl:clk, irq_mapper:clk, jtag_uart:clk, mm_interconnect_0:PLL_c0_clk, parallel_port_buttons:clk, parallel_port_led2:clk, parallel_port_led3:clk, rst_controller:clk, sysid:clock]
+	component lab3_sopc_rst_controller_002 is
+		generic (
+			NUM_RESET_INPUTS          : integer := 6;
+			OUTPUT_RESET_SYNC_EDGES   : string  := "deassert";
+			SYNC_DEPTH                : integer := 2;
+			RESET_REQUEST_PRESENT     : integer := 0;
+			RESET_REQ_WAIT_TIME       : integer := 1;
+			MIN_RST_ASSERTION_TIME    : integer := 3;
+			RESET_REQ_EARLY_DSRT_TIME : integer := 1;
+			USE_RESET_REQUEST_IN0     : integer := 0;
+			USE_RESET_REQUEST_IN1     : integer := 0;
+			USE_RESET_REQUEST_IN2     : integer := 0;
+			USE_RESET_REQUEST_IN3     : integer := 0;
+			USE_RESET_REQUEST_IN4     : integer := 0;
+			USE_RESET_REQUEST_IN5     : integer := 0;
+			USE_RESET_REQUEST_IN6     : integer := 0;
+			USE_RESET_REQUEST_IN7     : integer := 0;
+			USE_RESET_REQUEST_IN8     : integer := 0;
+			USE_RESET_REQUEST_IN9     : integer := 0;
+			USE_RESET_REQUEST_IN10    : integer := 0;
+			USE_RESET_REQUEST_IN11    : integer := 0;
+			USE_RESET_REQUEST_IN12    : integer := 0;
+			USE_RESET_REQUEST_IN13    : integer := 0;
+			USE_RESET_REQUEST_IN14    : integer := 0;
+			USE_RESET_REQUEST_IN15    : integer := 0;
+			ADAPT_RESET_REQUEST       : integer := 0
+		);
+		port (
+			reset_in0      : in  std_logic := 'X'; -- reset_in0.reset
+			clk            : in  std_logic := 'X'; --       clk.clk
+			reset_out      : out std_logic;        -- reset_out.reset
+			reset_in1      : in  std_logic := 'X';
+			reset_in10     : in  std_logic := 'X';
+			reset_in11     : in  std_logic := 'X';
+			reset_in12     : in  std_logic := 'X';
+			reset_in13     : in  std_logic := 'X';
+			reset_in14     : in  std_logic := 'X';
+			reset_in15     : in  std_logic := 'X';
+			reset_in2      : in  std_logic := 'X';
+			reset_in3      : in  std_logic := 'X';
+			reset_in4      : in  std_logic := 'X';
+			reset_in5      : in  std_logic := 'X';
+			reset_in6      : in  std_logic := 'X';
+			reset_in7      : in  std_logic := 'X';
+			reset_in8      : in  std_logic := 'X';
+			reset_in9      : in  std_logic := 'X';
+			reset_req      : out std_logic;
+			reset_req_in0  : in  std_logic := 'X';
+			reset_req_in1  : in  std_logic := 'X';
+			reset_req_in10 : in  std_logic := 'X';
+			reset_req_in11 : in  std_logic := 'X';
+			reset_req_in12 : in  std_logic := 'X';
+			reset_req_in13 : in  std_logic := 'X';
+			reset_req_in14 : in  std_logic := 'X';
+			reset_req_in15 : in  std_logic := 'X';
+			reset_req_in2  : in  std_logic := 'X';
+			reset_req_in3  : in  std_logic := 'X';
+			reset_req_in4  : in  std_logic := 'X';
+			reset_req_in5  : in  std_logic := 'X';
+			reset_req_in6  : in  std_logic := 'X';
+			reset_req_in7  : in  std_logic := 'X';
+			reset_req_in8  : in  std_logic := 'X';
+			reset_req_in9  : in  std_logic := 'X'
+		);
+	end component lab3_sopc_rst_controller_002;
+
+	signal pll_c0_clk                                                    : std_logic;                     -- PLL:c0 -> [CPU:clk, SDRAM_ctrl:clk, irq_mapper:clk, jtag_uart:clk, mm_interconnect_0:PLL_c0_clk, parallel_port_buttons:clk, parallel_port_led_row2:clk, parallel_port_led_row3:clk, rst_controller:clk, rst_controller_002:clk, sysid:clock]
 	signal cpu_debug_reset_request_reset                                 : std_logic;                     -- CPU:debug_reset_request -> [cpu_debug_reset_request_reset:in, mm_interconnect_0:jtag_uart_reset_reset_bridge_in_reset_reset, rst_controller:reset_in1, rst_controller_001:reset_in1]
 	signal cpu_data_master_readdata                                      : std_logic_vector(31 downto 0); -- mm_interconnect_0:CPU_data_master_readdata -> CPU:d_readdata
 	signal cpu_data_master_waitrequest                                   : std_logic;                     -- mm_interconnect_0:CPU_data_master_waitrequest -> CPU:d_waitrequest
@@ -379,21 +446,21 @@ architecture rtl of lab3_sopc is
 	signal cpu_instruction_master_address                                : std_logic_vector(25 downto 0); -- CPU:i_address -> mm_interconnect_0:CPU_instruction_master_address
 	signal cpu_instruction_master_read                                   : std_logic;                     -- CPU:i_read -> mm_interconnect_0:CPU_instruction_master_read
 	signal cpu_instruction_master_readdatavalid                          : std_logic;                     -- mm_interconnect_0:CPU_instruction_master_readdatavalid -> CPU:i_readdatavalid
-	signal mm_interconnect_0_parallel_port_led2_av_readdata              : std_logic_vector(7 downto 0);  -- parallel_port_led2:av_readdata -> mm_interconnect_0:parallel_port_led2_av_readdata
-	signal mm_interconnect_0_parallel_port_led2_av_address               : std_logic_vector(2 downto 0);  -- mm_interconnect_0:parallel_port_led2_av_address -> parallel_port_led2:av_address
-	signal mm_interconnect_0_parallel_port_led2_av_read                  : std_logic;                     -- mm_interconnect_0:parallel_port_led2_av_read -> parallel_port_led2:av_read
-	signal mm_interconnect_0_parallel_port_led2_av_write                 : std_logic;                     -- mm_interconnect_0:parallel_port_led2_av_write -> parallel_port_led2:av_write
-	signal mm_interconnect_0_parallel_port_led2_av_writedata             : std_logic_vector(7 downto 0);  -- mm_interconnect_0:parallel_port_led2_av_writedata -> parallel_port_led2:av_writedata
-	signal mm_interconnect_0_parallel_port_led3_av_readdata              : std_logic_vector(7 downto 0);  -- parallel_port_led3:av_readdata -> mm_interconnect_0:parallel_port_led3_av_readdata
-	signal mm_interconnect_0_parallel_port_led3_av_address               : std_logic_vector(2 downto 0);  -- mm_interconnect_0:parallel_port_led3_av_address -> parallel_port_led3:av_address
-	signal mm_interconnect_0_parallel_port_led3_av_read                  : std_logic;                     -- mm_interconnect_0:parallel_port_led3_av_read -> parallel_port_led3:av_read
-	signal mm_interconnect_0_parallel_port_led3_av_write                 : std_logic;                     -- mm_interconnect_0:parallel_port_led3_av_write -> parallel_port_led3:av_write
-	signal mm_interconnect_0_parallel_port_led3_av_writedata             : std_logic_vector(7 downto 0);  -- mm_interconnect_0:parallel_port_led3_av_writedata -> parallel_port_led3:av_writedata
 	signal mm_interconnect_0_parallel_port_buttons_av_readdata           : std_logic_vector(7 downto 0);  -- parallel_port_buttons:av_readdata -> mm_interconnect_0:parallel_port_buttons_av_readdata
 	signal mm_interconnect_0_parallel_port_buttons_av_address            : std_logic_vector(2 downto 0);  -- mm_interconnect_0:parallel_port_buttons_av_address -> parallel_port_buttons:av_address
 	signal mm_interconnect_0_parallel_port_buttons_av_read               : std_logic;                     -- mm_interconnect_0:parallel_port_buttons_av_read -> parallel_port_buttons:av_read
 	signal mm_interconnect_0_parallel_port_buttons_av_write              : std_logic;                     -- mm_interconnect_0:parallel_port_buttons_av_write -> parallel_port_buttons:av_write
 	signal mm_interconnect_0_parallel_port_buttons_av_writedata          : std_logic_vector(7 downto 0);  -- mm_interconnect_0:parallel_port_buttons_av_writedata -> parallel_port_buttons:av_writedata
+	signal mm_interconnect_0_parallel_port_led_row2_av_readdata          : std_logic_vector(7 downto 0);  -- parallel_port_led_row2:av_readdata -> mm_interconnect_0:parallel_port_led_row2_av_readdata
+	signal mm_interconnect_0_parallel_port_led_row2_av_address           : std_logic_vector(2 downto 0);  -- mm_interconnect_0:parallel_port_led_row2_av_address -> parallel_port_led_row2:av_address
+	signal mm_interconnect_0_parallel_port_led_row2_av_read              : std_logic;                     -- mm_interconnect_0:parallel_port_led_row2_av_read -> parallel_port_led_row2:av_read
+	signal mm_interconnect_0_parallel_port_led_row2_av_write             : std_logic;                     -- mm_interconnect_0:parallel_port_led_row2_av_write -> parallel_port_led_row2:av_write
+	signal mm_interconnect_0_parallel_port_led_row2_av_writedata         : std_logic_vector(7 downto 0);  -- mm_interconnect_0:parallel_port_led_row2_av_writedata -> parallel_port_led_row2:av_writedata
+	signal mm_interconnect_0_parallel_port_led_row3_av_readdata          : std_logic_vector(7 downto 0);  -- parallel_port_led_row3:av_readdata -> mm_interconnect_0:parallel_port_led_row3_av_readdata
+	signal mm_interconnect_0_parallel_port_led_row3_av_address           : std_logic_vector(2 downto 0);  -- mm_interconnect_0:parallel_port_led_row3_av_address -> parallel_port_led_row3:av_address
+	signal mm_interconnect_0_parallel_port_led_row3_av_read              : std_logic;                     -- mm_interconnect_0:parallel_port_led_row3_av_read -> parallel_port_led_row3:av_read
+	signal mm_interconnect_0_parallel_port_led_row3_av_write             : std_logic;                     -- mm_interconnect_0:parallel_port_led_row3_av_write -> parallel_port_led_row3:av_write
+	signal mm_interconnect_0_parallel_port_led_row3_av_writedata         : std_logic_vector(7 downto 0);  -- mm_interconnect_0:parallel_port_led_row3_av_writedata -> parallel_port_led_row3:av_writedata
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect      : std_logic;                     -- mm_interconnect_0:jtag_uart_avalon_jtag_slave_chipselect -> jtag_uart:av_chipselect
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_readdata        : std_logic_vector(31 downto 0); -- jtag_uart:av_readdata -> mm_interconnect_0:jtag_uart_avalon_jtag_slave_readdata
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest     : std_logic;                     -- jtag_uart:av_waitrequest -> mm_interconnect_0:jtag_uart_avalon_jtag_slave_waitrequest
@@ -425,22 +492,24 @@ architecture rtl of lab3_sopc is
 	signal mm_interconnect_0_sdram_ctrl_s1_readdatavalid                 : std_logic;                     -- SDRAM_ctrl:za_valid -> mm_interconnect_0:SDRAM_ctrl_s1_readdatavalid
 	signal mm_interconnect_0_sdram_ctrl_s1_write                         : std_logic;                     -- mm_interconnect_0:SDRAM_ctrl_s1_write -> mm_interconnect_0_sdram_ctrl_s1_write:in
 	signal mm_interconnect_0_sdram_ctrl_s1_writedata                     : std_logic_vector(15 downto 0); -- mm_interconnect_0:SDRAM_ctrl_s1_writedata -> SDRAM_ctrl:az_data
-	signal irq_mapper_receiver0_irq                                      : std_logic;                     -- parallel_port_led2:irq -> irq_mapper:receiver0_irq
-	signal irq_mapper_receiver1_irq                                      : std_logic;                     -- parallel_port_led3:irq -> irq_mapper:receiver1_irq
-	signal irq_mapper_receiver2_irq                                      : std_logic;                     -- parallel_port_buttons:irq -> irq_mapper:receiver2_irq
+	signal irq_mapper_receiver0_irq                                      : std_logic;                     -- parallel_port_buttons:irq -> irq_mapper:receiver0_irq
+	signal irq_mapper_receiver1_irq                                      : std_logic;                     -- parallel_port_led_row2:irq -> irq_mapper:receiver1_irq
+	signal irq_mapper_receiver2_irq                                      : std_logic;                     -- parallel_port_led_row3:irq -> irq_mapper:receiver2_irq
 	signal irq_mapper_receiver3_irq                                      : std_logic;                     -- jtag_uart:av_irq -> irq_mapper:receiver3_irq
 	signal cpu_irq_irq                                                   : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> CPU:irq
 	signal rst_controller_reset_out_reset                                : std_logic;                     -- rst_controller:reset_out -> [irq_mapper:reset, mm_interconnect_0:CPU_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
 	signal rst_controller_reset_out_reset_req                            : std_logic;                     -- rst_controller:reset_req -> [CPU:reset_req, rst_translator:reset_req_in]
 	signal rst_controller_001_reset_out_reset                            : std_logic;                     -- rst_controller_001:reset_out -> [PLL:reset, mm_interconnect_0:PLL_inclk_interface_reset_reset_bridge_in_reset_reset]
-	signal reset_reset_n_ports_inv                                       : std_logic;                     -- reset_reset_n:inv -> [rst_controller:reset_in0, rst_controller_001:reset_in0]
+	signal rst_controller_002_reset_out_reset                            : std_logic;                     -- rst_controller_002:reset_out -> [mm_interconnect_0:parallel_port_buttons_reset_reset_bridge_in_reset_reset, rst_controller_002_reset_out_reset:in]
+	signal reset_reset_n_ports_inv                                       : std_logic;                     -- reset_reset_n:inv -> [rst_controller:reset_in0, rst_controller_001:reset_in0, rst_controller_002:reset_in0]
 	signal cpu_debug_reset_request_reset_ports_inv                       : std_logic;                     -- cpu_debug_reset_request_reset:inv -> jtag_uart:rst_n
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_read_ports_inv  : std_logic;                     -- mm_interconnect_0_jtag_uart_avalon_jtag_slave_read:inv -> jtag_uart:av_read_n
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_write_ports_inv : std_logic;                     -- mm_interconnect_0_jtag_uart_avalon_jtag_slave_write:inv -> jtag_uart:av_write_n
 	signal mm_interconnect_0_sdram_ctrl_s1_read_ports_inv                : std_logic;                     -- mm_interconnect_0_sdram_ctrl_s1_read:inv -> SDRAM_ctrl:az_rd_n
 	signal mm_interconnect_0_sdram_ctrl_s1_byteenable_ports_inv          : std_logic_vector(1 downto 0);  -- mm_interconnect_0_sdram_ctrl_s1_byteenable:inv -> SDRAM_ctrl:az_be_n
 	signal mm_interconnect_0_sdram_ctrl_s1_write_ports_inv               : std_logic;                     -- mm_interconnect_0_sdram_ctrl_s1_write:inv -> SDRAM_ctrl:az_wr_n
-	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                     -- rst_controller_reset_out_reset:inv -> [CPU:reset_n, SDRAM_ctrl:reset_n, parallel_port_buttons:reset_n, parallel_port_led2:reset_n, parallel_port_led3:reset_n, sysid:reset_n]
+	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                     -- rst_controller_reset_out_reset:inv -> [CPU:reset_n, SDRAM_ctrl:reset_n, sysid:reset_n]
+	signal rst_controller_002_reset_out_reset_ports_inv                  : std_logic;                     -- rst_controller_002_reset_out_reset:inv -> [parallel_port_buttons:reset_n, parallel_port_led_row2:reset_n, parallel_port_led_row3:reset_n]
 
 begin
 
@@ -541,7 +610,7 @@ begin
 
 	parallel_port_buttons : component simplePIO
 		port map (
-			irq          => irq_mapper_receiver2_irq,                             -- interrupt_sender.irq
+			irq          => irq_mapper_receiver0_irq,                             -- interrupt_sender.irq
 			av_address   => mm_interconnect_0_parallel_port_buttons_av_address,   --               av.address
 			av_read      => mm_interconnect_0_parallel_port_buttons_av_read,      --                 .read
 			av_readdata  => mm_interconnect_0_parallel_port_buttons_av_readdata,  --                 .readdata
@@ -549,33 +618,33 @@ begin
 			av_writedata => mm_interconnect_0_parallel_port_buttons_av_writedata, --                 .writedata
 			conduit_data => buttons_export,                                       --         pio_port.export
 			clk          => pll_c0_clk,                                           --            clock.clk
-			reset_n      => rst_controller_reset_out_reset_ports_inv              --            reset.reset_n
+			reset_n      => rst_controller_002_reset_out_reset_ports_inv          --            reset.reset_n
 		);
 
-	parallel_port_led2 : component simplePIO
+	parallel_port_led_row2 : component simplePIO
 		port map (
-			irq          => irq_mapper_receiver0_irq,                          -- interrupt_sender.irq
-			av_address   => mm_interconnect_0_parallel_port_led2_av_address,   --               av.address
-			av_read      => mm_interconnect_0_parallel_port_led2_av_read,      --                 .read
-			av_readdata  => mm_interconnect_0_parallel_port_led2_av_readdata,  --                 .readdata
-			av_write     => mm_interconnect_0_parallel_port_led2_av_write,     --                 .write
-			av_writedata => mm_interconnect_0_parallel_port_led2_av_writedata, --                 .writedata
-			conduit_data => led_row2_export,                                   --         pio_port.export
-			clk          => pll_c0_clk,                                        --            clock.clk
-			reset_n      => rst_controller_reset_out_reset_ports_inv           --            reset.reset_n
+			irq          => irq_mapper_receiver1_irq,                              -- interrupt_sender.irq
+			av_address   => mm_interconnect_0_parallel_port_led_row2_av_address,   --               av.address
+			av_read      => mm_interconnect_0_parallel_port_led_row2_av_read,      --                 .read
+			av_readdata  => mm_interconnect_0_parallel_port_led_row2_av_readdata,  --                 .readdata
+			av_write     => mm_interconnect_0_parallel_port_led_row2_av_write,     --                 .write
+			av_writedata => mm_interconnect_0_parallel_port_led_row2_av_writedata, --                 .writedata
+			conduit_data => led_row2_export,                                       --         pio_port.export
+			clk          => pll_c0_clk,                                            --            clock.clk
+			reset_n      => rst_controller_002_reset_out_reset_ports_inv           --            reset.reset_n
 		);
 
-	parallel_port_led3 : component simplePIO
+	parallel_port_led_row3 : component simplePIO
 		port map (
-			irq          => irq_mapper_receiver1_irq,                          -- interrupt_sender.irq
-			av_address   => mm_interconnect_0_parallel_port_led3_av_address,   --               av.address
-			av_read      => mm_interconnect_0_parallel_port_led3_av_read,      --                 .read
-			av_readdata  => mm_interconnect_0_parallel_port_led3_av_readdata,  --                 .readdata
-			av_write     => mm_interconnect_0_parallel_port_led3_av_write,     --                 .write
-			av_writedata => mm_interconnect_0_parallel_port_led3_av_writedata, --                 .writedata
-			conduit_data => led_row3_export,                                   --         pio_port.export
-			clk          => pll_c0_clk,                                        --            clock.clk
-			reset_n      => rst_controller_reset_out_reset_ports_inv           --            reset.reset_n
+			irq          => irq_mapper_receiver2_irq,                              -- interrupt_sender.irq
+			av_address   => mm_interconnect_0_parallel_port_led_row3_av_address,   --               av.address
+			av_read      => mm_interconnect_0_parallel_port_led_row3_av_read,      --                 .read
+			av_readdata  => mm_interconnect_0_parallel_port_led_row3_av_readdata,  --                 .readdata
+			av_write     => mm_interconnect_0_parallel_port_led_row3_av_write,     --                 .write
+			av_writedata => mm_interconnect_0_parallel_port_led_row3_av_writedata, --                 .writedata
+			conduit_data => led_row3_export,                                       --         pio_port.export
+			clk          => pll_c0_clk,                                            --            clock.clk
+			reset_n      => rst_controller_002_reset_out_reset_ports_inv           --            reset.reset_n
 		);
 
 	sysid : component lab3_sopc_sysid
@@ -588,71 +657,72 @@ begin
 
 	mm_interconnect_0 : component lab3_sopc_mm_interconnect_0
 		port map (
-			clk_0_clk_clk                                         => clk_clk,                                                   --                                       clk_0_clk.clk
-			PLL_c0_clk                                            => pll_c0_clk,                                                --                                          PLL_c0.clk
-			CPU_reset_reset_bridge_in_reset_reset                 => rst_controller_reset_out_reset,                            --                 CPU_reset_reset_bridge_in_reset.reset
-			jtag_uart_reset_reset_bridge_in_reset_reset           => cpu_debug_reset_request_reset,                             --           jtag_uart_reset_reset_bridge_in_reset.reset
-			PLL_inclk_interface_reset_reset_bridge_in_reset_reset => rst_controller_001_reset_out_reset,                        -- PLL_inclk_interface_reset_reset_bridge_in_reset.reset
-			CPU_data_master_address                               => cpu_data_master_address,                                   --                                 CPU_data_master.address
-			CPU_data_master_waitrequest                           => cpu_data_master_waitrequest,                               --                                                .waitrequest
-			CPU_data_master_byteenable                            => cpu_data_master_byteenable,                                --                                                .byteenable
-			CPU_data_master_read                                  => cpu_data_master_read,                                      --                                                .read
-			CPU_data_master_readdata                              => cpu_data_master_readdata,                                  --                                                .readdata
-			CPU_data_master_readdatavalid                         => cpu_data_master_readdatavalid,                             --                                                .readdatavalid
-			CPU_data_master_write                                 => cpu_data_master_write,                                     --                                                .write
-			CPU_data_master_writedata                             => cpu_data_master_writedata,                                 --                                                .writedata
-			CPU_data_master_debugaccess                           => cpu_data_master_debugaccess,                               --                                                .debugaccess
-			CPU_instruction_master_address                        => cpu_instruction_master_address,                            --                          CPU_instruction_master.address
-			CPU_instruction_master_waitrequest                    => cpu_instruction_master_waitrequest,                        --                                                .waitrequest
-			CPU_instruction_master_read                           => cpu_instruction_master_read,                               --                                                .read
-			CPU_instruction_master_readdata                       => cpu_instruction_master_readdata,                           --                                                .readdata
-			CPU_instruction_master_readdatavalid                  => cpu_instruction_master_readdatavalid,                      --                                                .readdatavalid
-			CPU_debug_mem_slave_address                           => mm_interconnect_0_cpu_debug_mem_slave_address,             --                             CPU_debug_mem_slave.address
-			CPU_debug_mem_slave_write                             => mm_interconnect_0_cpu_debug_mem_slave_write,               --                                                .write
-			CPU_debug_mem_slave_read                              => mm_interconnect_0_cpu_debug_mem_slave_read,                --                                                .read
-			CPU_debug_mem_slave_readdata                          => mm_interconnect_0_cpu_debug_mem_slave_readdata,            --                                                .readdata
-			CPU_debug_mem_slave_writedata                         => mm_interconnect_0_cpu_debug_mem_slave_writedata,           --                                                .writedata
-			CPU_debug_mem_slave_byteenable                        => mm_interconnect_0_cpu_debug_mem_slave_byteenable,          --                                                .byteenable
-			CPU_debug_mem_slave_waitrequest                       => mm_interconnect_0_cpu_debug_mem_slave_waitrequest,         --                                                .waitrequest
-			CPU_debug_mem_slave_debugaccess                       => mm_interconnect_0_cpu_debug_mem_slave_debugaccess,         --                                                .debugaccess
-			jtag_uart_avalon_jtag_slave_address                   => mm_interconnect_0_jtag_uart_avalon_jtag_slave_address,     --                     jtag_uart_avalon_jtag_slave.address
-			jtag_uart_avalon_jtag_slave_write                     => mm_interconnect_0_jtag_uart_avalon_jtag_slave_write,       --                                                .write
-			jtag_uart_avalon_jtag_slave_read                      => mm_interconnect_0_jtag_uart_avalon_jtag_slave_read,        --                                                .read
-			jtag_uart_avalon_jtag_slave_readdata                  => mm_interconnect_0_jtag_uart_avalon_jtag_slave_readdata,    --                                                .readdata
-			jtag_uart_avalon_jtag_slave_writedata                 => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,   --                                                .writedata
-			jtag_uart_avalon_jtag_slave_waitrequest               => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest, --                                                .waitrequest
-			jtag_uart_avalon_jtag_slave_chipselect                => mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect,  --                                                .chipselect
-			parallel_port_buttons_av_address                      => mm_interconnect_0_parallel_port_buttons_av_address,        --                        parallel_port_buttons_av.address
-			parallel_port_buttons_av_write                        => mm_interconnect_0_parallel_port_buttons_av_write,          --                                                .write
-			parallel_port_buttons_av_read                         => mm_interconnect_0_parallel_port_buttons_av_read,           --                                                .read
-			parallel_port_buttons_av_readdata                     => mm_interconnect_0_parallel_port_buttons_av_readdata,       --                                                .readdata
-			parallel_port_buttons_av_writedata                    => mm_interconnect_0_parallel_port_buttons_av_writedata,      --                                                .writedata
-			parallel_port_led2_av_address                         => mm_interconnect_0_parallel_port_led2_av_address,           --                           parallel_port_led2_av.address
-			parallel_port_led2_av_write                           => mm_interconnect_0_parallel_port_led2_av_write,             --                                                .write
-			parallel_port_led2_av_read                            => mm_interconnect_0_parallel_port_led2_av_read,              --                                                .read
-			parallel_port_led2_av_readdata                        => mm_interconnect_0_parallel_port_led2_av_readdata,          --                                                .readdata
-			parallel_port_led2_av_writedata                       => mm_interconnect_0_parallel_port_led2_av_writedata,         --                                                .writedata
-			parallel_port_led3_av_address                         => mm_interconnect_0_parallel_port_led3_av_address,           --                           parallel_port_led3_av.address
-			parallel_port_led3_av_write                           => mm_interconnect_0_parallel_port_led3_av_write,             --                                                .write
-			parallel_port_led3_av_read                            => mm_interconnect_0_parallel_port_led3_av_read,              --                                                .read
-			parallel_port_led3_av_readdata                        => mm_interconnect_0_parallel_port_led3_av_readdata,          --                                                .readdata
-			parallel_port_led3_av_writedata                       => mm_interconnect_0_parallel_port_led3_av_writedata,         --                                                .writedata
-			PLL_pll_slave_address                                 => mm_interconnect_0_pll_pll_slave_address,                   --                                   PLL_pll_slave.address
-			PLL_pll_slave_write                                   => mm_interconnect_0_pll_pll_slave_write,                     --                                                .write
-			PLL_pll_slave_read                                    => mm_interconnect_0_pll_pll_slave_read,                      --                                                .read
-			PLL_pll_slave_readdata                                => mm_interconnect_0_pll_pll_slave_readdata,                  --                                                .readdata
-			PLL_pll_slave_writedata                               => mm_interconnect_0_pll_pll_slave_writedata,                 --                                                .writedata
-			SDRAM_ctrl_s1_address                                 => mm_interconnect_0_sdram_ctrl_s1_address,                   --                                   SDRAM_ctrl_s1.address
-			SDRAM_ctrl_s1_write                                   => mm_interconnect_0_sdram_ctrl_s1_write,                     --                                                .write
-			SDRAM_ctrl_s1_read                                    => mm_interconnect_0_sdram_ctrl_s1_read,                      --                                                .read
-			SDRAM_ctrl_s1_readdata                                => mm_interconnect_0_sdram_ctrl_s1_readdata,                  --                                                .readdata
-			SDRAM_ctrl_s1_writedata                               => mm_interconnect_0_sdram_ctrl_s1_writedata,                 --                                                .writedata
-			SDRAM_ctrl_s1_byteenable                              => mm_interconnect_0_sdram_ctrl_s1_byteenable,                --                                                .byteenable
-			SDRAM_ctrl_s1_readdatavalid                           => mm_interconnect_0_sdram_ctrl_s1_readdatavalid,             --                                                .readdatavalid
-			SDRAM_ctrl_s1_waitrequest                             => mm_interconnect_0_sdram_ctrl_s1_waitrequest,               --                                                .waitrequest
-			SDRAM_ctrl_s1_chipselect                              => mm_interconnect_0_sdram_ctrl_s1_chipselect,                --                                                .chipselect
-			sysid_control_slave_address                           => mm_interconnect_0_sysid_control_slave_address,             --                             sysid_control_slave.address
-			sysid_control_slave_readdata                          => mm_interconnect_0_sysid_control_slave_readdata             --                                                .readdata
+			clk_0_clk_clk                                           => clk_clk,                                                   --                                         clk_0_clk.clk
+			PLL_c0_clk                                              => pll_c0_clk,                                                --                                            PLL_c0.clk
+			CPU_reset_reset_bridge_in_reset_reset                   => rst_controller_reset_out_reset,                            --                   CPU_reset_reset_bridge_in_reset.reset
+			jtag_uart_reset_reset_bridge_in_reset_reset             => cpu_debug_reset_request_reset,                             --             jtag_uart_reset_reset_bridge_in_reset.reset
+			parallel_port_buttons_reset_reset_bridge_in_reset_reset => rst_controller_002_reset_out_reset,                        -- parallel_port_buttons_reset_reset_bridge_in_reset.reset
+			PLL_inclk_interface_reset_reset_bridge_in_reset_reset   => rst_controller_001_reset_out_reset,                        --   PLL_inclk_interface_reset_reset_bridge_in_reset.reset
+			CPU_data_master_address                                 => cpu_data_master_address,                                   --                                   CPU_data_master.address
+			CPU_data_master_waitrequest                             => cpu_data_master_waitrequest,                               --                                                  .waitrequest
+			CPU_data_master_byteenable                              => cpu_data_master_byteenable,                                --                                                  .byteenable
+			CPU_data_master_read                                    => cpu_data_master_read,                                      --                                                  .read
+			CPU_data_master_readdata                                => cpu_data_master_readdata,                                  --                                                  .readdata
+			CPU_data_master_readdatavalid                           => cpu_data_master_readdatavalid,                             --                                                  .readdatavalid
+			CPU_data_master_write                                   => cpu_data_master_write,                                     --                                                  .write
+			CPU_data_master_writedata                               => cpu_data_master_writedata,                                 --                                                  .writedata
+			CPU_data_master_debugaccess                             => cpu_data_master_debugaccess,                               --                                                  .debugaccess
+			CPU_instruction_master_address                          => cpu_instruction_master_address,                            --                            CPU_instruction_master.address
+			CPU_instruction_master_waitrequest                      => cpu_instruction_master_waitrequest,                        --                                                  .waitrequest
+			CPU_instruction_master_read                             => cpu_instruction_master_read,                               --                                                  .read
+			CPU_instruction_master_readdata                         => cpu_instruction_master_readdata,                           --                                                  .readdata
+			CPU_instruction_master_readdatavalid                    => cpu_instruction_master_readdatavalid,                      --                                                  .readdatavalid
+			CPU_debug_mem_slave_address                             => mm_interconnect_0_cpu_debug_mem_slave_address,             --                               CPU_debug_mem_slave.address
+			CPU_debug_mem_slave_write                               => mm_interconnect_0_cpu_debug_mem_slave_write,               --                                                  .write
+			CPU_debug_mem_slave_read                                => mm_interconnect_0_cpu_debug_mem_slave_read,                --                                                  .read
+			CPU_debug_mem_slave_readdata                            => mm_interconnect_0_cpu_debug_mem_slave_readdata,            --                                                  .readdata
+			CPU_debug_mem_slave_writedata                           => mm_interconnect_0_cpu_debug_mem_slave_writedata,           --                                                  .writedata
+			CPU_debug_mem_slave_byteenable                          => mm_interconnect_0_cpu_debug_mem_slave_byteenable,          --                                                  .byteenable
+			CPU_debug_mem_slave_waitrequest                         => mm_interconnect_0_cpu_debug_mem_slave_waitrequest,         --                                                  .waitrequest
+			CPU_debug_mem_slave_debugaccess                         => mm_interconnect_0_cpu_debug_mem_slave_debugaccess,         --                                                  .debugaccess
+			jtag_uart_avalon_jtag_slave_address                     => mm_interconnect_0_jtag_uart_avalon_jtag_slave_address,     --                       jtag_uart_avalon_jtag_slave.address
+			jtag_uart_avalon_jtag_slave_write                       => mm_interconnect_0_jtag_uart_avalon_jtag_slave_write,       --                                                  .write
+			jtag_uart_avalon_jtag_slave_read                        => mm_interconnect_0_jtag_uart_avalon_jtag_slave_read,        --                                                  .read
+			jtag_uart_avalon_jtag_slave_readdata                    => mm_interconnect_0_jtag_uart_avalon_jtag_slave_readdata,    --                                                  .readdata
+			jtag_uart_avalon_jtag_slave_writedata                   => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,   --                                                  .writedata
+			jtag_uart_avalon_jtag_slave_waitrequest                 => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest, --                                                  .waitrequest
+			jtag_uart_avalon_jtag_slave_chipselect                  => mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect,  --                                                  .chipselect
+			parallel_port_buttons_av_address                        => mm_interconnect_0_parallel_port_buttons_av_address,        --                          parallel_port_buttons_av.address
+			parallel_port_buttons_av_write                          => mm_interconnect_0_parallel_port_buttons_av_write,          --                                                  .write
+			parallel_port_buttons_av_read                           => mm_interconnect_0_parallel_port_buttons_av_read,           --                                                  .read
+			parallel_port_buttons_av_readdata                       => mm_interconnect_0_parallel_port_buttons_av_readdata,       --                                                  .readdata
+			parallel_port_buttons_av_writedata                      => mm_interconnect_0_parallel_port_buttons_av_writedata,      --                                                  .writedata
+			parallel_port_led_row2_av_address                       => mm_interconnect_0_parallel_port_led_row2_av_address,       --                         parallel_port_led_row2_av.address
+			parallel_port_led_row2_av_write                         => mm_interconnect_0_parallel_port_led_row2_av_write,         --                                                  .write
+			parallel_port_led_row2_av_read                          => mm_interconnect_0_parallel_port_led_row2_av_read,          --                                                  .read
+			parallel_port_led_row2_av_readdata                      => mm_interconnect_0_parallel_port_led_row2_av_readdata,      --                                                  .readdata
+			parallel_port_led_row2_av_writedata                     => mm_interconnect_0_parallel_port_led_row2_av_writedata,     --                                                  .writedata
+			parallel_port_led_row3_av_address                       => mm_interconnect_0_parallel_port_led_row3_av_address,       --                         parallel_port_led_row3_av.address
+			parallel_port_led_row3_av_write                         => mm_interconnect_0_parallel_port_led_row3_av_write,         --                                                  .write
+			parallel_port_led_row3_av_read                          => mm_interconnect_0_parallel_port_led_row3_av_read,          --                                                  .read
+			parallel_port_led_row3_av_readdata                      => mm_interconnect_0_parallel_port_led_row3_av_readdata,      --                                                  .readdata
+			parallel_port_led_row3_av_writedata                     => mm_interconnect_0_parallel_port_led_row3_av_writedata,     --                                                  .writedata
+			PLL_pll_slave_address                                   => mm_interconnect_0_pll_pll_slave_address,                   --                                     PLL_pll_slave.address
+			PLL_pll_slave_write                                     => mm_interconnect_0_pll_pll_slave_write,                     --                                                  .write
+			PLL_pll_slave_read                                      => mm_interconnect_0_pll_pll_slave_read,                      --                                                  .read
+			PLL_pll_slave_readdata                                  => mm_interconnect_0_pll_pll_slave_readdata,                  --                                                  .readdata
+			PLL_pll_slave_writedata                                 => mm_interconnect_0_pll_pll_slave_writedata,                 --                                                  .writedata
+			SDRAM_ctrl_s1_address                                   => mm_interconnect_0_sdram_ctrl_s1_address,                   --                                     SDRAM_ctrl_s1.address
+			SDRAM_ctrl_s1_write                                     => mm_interconnect_0_sdram_ctrl_s1_write,                     --                                                  .write
+			SDRAM_ctrl_s1_read                                      => mm_interconnect_0_sdram_ctrl_s1_read,                      --                                                  .read
+			SDRAM_ctrl_s1_readdata                                  => mm_interconnect_0_sdram_ctrl_s1_readdata,                  --                                                  .readdata
+			SDRAM_ctrl_s1_writedata                                 => mm_interconnect_0_sdram_ctrl_s1_writedata,                 --                                                  .writedata
+			SDRAM_ctrl_s1_byteenable                                => mm_interconnect_0_sdram_ctrl_s1_byteenable,                --                                                  .byteenable
+			SDRAM_ctrl_s1_readdatavalid                             => mm_interconnect_0_sdram_ctrl_s1_readdatavalid,             --                                                  .readdatavalid
+			SDRAM_ctrl_s1_waitrequest                               => mm_interconnect_0_sdram_ctrl_s1_waitrequest,               --                                                  .waitrequest
+			SDRAM_ctrl_s1_chipselect                                => mm_interconnect_0_sdram_ctrl_s1_chipselect,                --                                                  .chipselect
+			sysid_control_slave_address                             => mm_interconnect_0_sysid_control_slave_address,             --                               sysid_control_slave.address
+			sysid_control_slave_readdata                            => mm_interconnect_0_sysid_control_slave_readdata             --                                                  .readdata
 		);
 
 	irq_mapper : component lab3_sopc_irq_mapper
@@ -796,6 +866,71 @@ begin
 			reset_req_in15 => '0'                                 -- (terminated)
 		);
 
+	rst_controller_002 : component lab3_sopc_rst_controller_002
+		generic map (
+			NUM_RESET_INPUTS          => 1,
+			OUTPUT_RESET_SYNC_EDGES   => "deassert",
+			SYNC_DEPTH                => 2,
+			RESET_REQUEST_PRESENT     => 0,
+			RESET_REQ_WAIT_TIME       => 1,
+			MIN_RST_ASSERTION_TIME    => 3,
+			RESET_REQ_EARLY_DSRT_TIME => 1,
+			USE_RESET_REQUEST_IN0     => 0,
+			USE_RESET_REQUEST_IN1     => 0,
+			USE_RESET_REQUEST_IN2     => 0,
+			USE_RESET_REQUEST_IN3     => 0,
+			USE_RESET_REQUEST_IN4     => 0,
+			USE_RESET_REQUEST_IN5     => 0,
+			USE_RESET_REQUEST_IN6     => 0,
+			USE_RESET_REQUEST_IN7     => 0,
+			USE_RESET_REQUEST_IN8     => 0,
+			USE_RESET_REQUEST_IN9     => 0,
+			USE_RESET_REQUEST_IN10    => 0,
+			USE_RESET_REQUEST_IN11    => 0,
+			USE_RESET_REQUEST_IN12    => 0,
+			USE_RESET_REQUEST_IN13    => 0,
+			USE_RESET_REQUEST_IN14    => 0,
+			USE_RESET_REQUEST_IN15    => 0,
+			ADAPT_RESET_REQUEST       => 0
+		)
+		port map (
+			reset_in0      => reset_reset_n_ports_inv,            -- reset_in0.reset
+			clk            => pll_c0_clk,                         --       clk.clk
+			reset_out      => rst_controller_002_reset_out_reset, -- reset_out.reset
+			reset_req      => open,                               -- (terminated)
+			reset_req_in0  => '0',                                -- (terminated)
+			reset_in1      => '0',                                -- (terminated)
+			reset_req_in1  => '0',                                -- (terminated)
+			reset_in2      => '0',                                -- (terminated)
+			reset_req_in2  => '0',                                -- (terminated)
+			reset_in3      => '0',                                -- (terminated)
+			reset_req_in3  => '0',                                -- (terminated)
+			reset_in4      => '0',                                -- (terminated)
+			reset_req_in4  => '0',                                -- (terminated)
+			reset_in5      => '0',                                -- (terminated)
+			reset_req_in5  => '0',                                -- (terminated)
+			reset_in6      => '0',                                -- (terminated)
+			reset_req_in6  => '0',                                -- (terminated)
+			reset_in7      => '0',                                -- (terminated)
+			reset_req_in7  => '0',                                -- (terminated)
+			reset_in8      => '0',                                -- (terminated)
+			reset_req_in8  => '0',                                -- (terminated)
+			reset_in9      => '0',                                -- (terminated)
+			reset_req_in9  => '0',                                -- (terminated)
+			reset_in10     => '0',                                -- (terminated)
+			reset_req_in10 => '0',                                -- (terminated)
+			reset_in11     => '0',                                -- (terminated)
+			reset_req_in11 => '0',                                -- (terminated)
+			reset_in12     => '0',                                -- (terminated)
+			reset_req_in12 => '0',                                -- (terminated)
+			reset_in13     => '0',                                -- (terminated)
+			reset_req_in13 => '0',                                -- (terminated)
+			reset_in14     => '0',                                -- (terminated)
+			reset_req_in14 => '0',                                -- (terminated)
+			reset_in15     => '0',                                -- (terminated)
+			reset_req_in15 => '0'                                 -- (terminated)
+		);
+
 	reset_reset_n_ports_inv <= not reset_reset_n;
 
 	cpu_debug_reset_request_reset_ports_inv <= not cpu_debug_reset_request_reset;
@@ -811,5 +946,7 @@ begin
 	mm_interconnect_0_sdram_ctrl_s1_write_ports_inv <= not mm_interconnect_0_sdram_ctrl_s1_write;
 
 	rst_controller_reset_out_reset_ports_inv <= not rst_controller_reset_out_reset;
+
+	rst_controller_002_reset_out_reset_ports_inv <= not rst_controller_002_reset_out_reset;
 
 end architecture rtl; -- of lab3_sopc

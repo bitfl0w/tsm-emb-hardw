@@ -4,7 +4,7 @@
  * Machine generated for CPU 'CPU' in SOPC Builder design 'lab3_sopc'
  * SOPC Builder design path: ../../lab3_sopc.sopcinfo
  *
- * Generated: Tue Oct 24 21:53:41 CEST 2023
+ * Generated: Sun Oct 29 16:56:46 CET 2023
  */
 
 /*
@@ -164,20 +164,6 @@
 
 
 /*
- * Parallel_Port_0 configuration
- *
- */
-
-#define ALT_MODULE_CLASS_Parallel_Port_0 Parallel_Port
-#define PARALLEL_PORT_0_BASE 0x2001010
-#define PARALLEL_PORT_0_IRQ -1
-#define PARALLEL_PORT_0_IRQ_INTERRUPT_CONTROLLER_ID -1
-#define PARALLEL_PORT_0_NAME "/dev/Parallel_Port_0"
-#define PARALLEL_PORT_0_SPAN 8
-#define PARALLEL_PORT_0_TYPE "Parallel_Port"
-
-
-/*
  * SDRAM_ctrl configuration
  *
  */
@@ -232,19 +218,19 @@
 #define ALT_NUM_INTERNAL_INTERRUPT_CONTROLLERS 1
 #define ALT_NUM_INTERRUPT_CONTROLLERS 1
 #define ALT_STDERR "/dev/jtag_uart"
-#define ALT_STDERR_BASE 0x2001020
+#define ALT_STDERR_BASE 0x2001030
 #define ALT_STDERR_DEV jtag_uart
 #define ALT_STDERR_IS_JTAG_UART
 #define ALT_STDERR_PRESENT
 #define ALT_STDERR_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDIN "/dev/jtag_uart"
-#define ALT_STDIN_BASE 0x2001020
+#define ALT_STDIN_BASE 0x2001030
 #define ALT_STDIN_DEV jtag_uart
 #define ALT_STDIN_IS_JTAG_UART
 #define ALT_STDIN_PRESENT
 #define ALT_STDIN_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDOUT "/dev/jtag_uart"
-#define ALT_STDOUT_BASE 0x2001020
+#define ALT_STDOUT_BASE 0x2001030
 #define ALT_STDOUT_DEV jtag_uart
 #define ALT_STDOUT_IS_JTAG_UART
 #define ALT_STDOUT_PRESENT
@@ -269,7 +255,7 @@
  */
 
 #define ALT_MODULE_CLASS_jtag_uart altera_avalon_jtag_uart
-#define JTAG_UART_BASE 0x2001020
+#define JTAG_UART_BASE 0x2001030
 #define JTAG_UART_IRQ 0
 #define JTAG_UART_IRQ_INTERRUPT_CONTROLLER_ID 0
 #define JTAG_UART_NAME "/dev/jtag_uart"
@@ -282,18 +268,60 @@
 
 
 /*
+ * parallel_port_buttons configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_parallel_port_buttons Parallel_Port
+#define PARALLEL_PORT_BUTTONS_BASE 0x2001020
+#define PARALLEL_PORT_BUTTONS_IRQ -1
+#define PARALLEL_PORT_BUTTONS_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define PARALLEL_PORT_BUTTONS_NAME "/dev/parallel_port_buttons"
+#define PARALLEL_PORT_BUTTONS_SPAN 8
+#define PARALLEL_PORT_BUTTONS_TYPE "Parallel_Port"
+
+
+/*
+ * parallel_port_led_row2 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_parallel_port_led_row2 Parallel_Port
+#define PARALLEL_PORT_LED_ROW2_BASE 0x2001018
+#define PARALLEL_PORT_LED_ROW2_IRQ -1
+#define PARALLEL_PORT_LED_ROW2_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define PARALLEL_PORT_LED_ROW2_NAME "/dev/parallel_port_led_row2"
+#define PARALLEL_PORT_LED_ROW2_SPAN 8
+#define PARALLEL_PORT_LED_ROW2_TYPE "Parallel_Port"
+
+
+/*
+ * parallel_port_led_row3 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_parallel_port_led_row3 Parallel_Port
+#define PARALLEL_PORT_LED_ROW3_BASE 0x2001010
+#define PARALLEL_PORT_LED_ROW3_IRQ -1
+#define PARALLEL_PORT_LED_ROW3_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define PARALLEL_PORT_LED_ROW3_NAME "/dev/parallel_port_led_row3"
+#define PARALLEL_PORT_LED_ROW3_SPAN 8
+#define PARALLEL_PORT_LED_ROW3_TYPE "Parallel_Port"
+
+
+/*
  * sysid configuration
  *
  */
 
 #define ALT_MODULE_CLASS_sysid altera_avalon_sysid_qsys
-#define SYSID_BASE 0x2001018
+#define SYSID_BASE 0x2001028
 #define SYSID_ID 12213761
 #define SYSID_IRQ -1
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1698176921
+#define SYSID_TIMESTAMP 1698594846
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
 
 #endif /* __SYSTEM_H_ */

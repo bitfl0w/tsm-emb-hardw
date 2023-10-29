@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="lab3_sopc" kind="lab3_sopc" version="1.0" fabric="QSYS">
  <!-- Format version 18.1 625 (Future versions may contain additional information.) -->
- <!-- 2023.10.25.15:44:11 -->
+ <!-- 2023.10.29.16:54:07 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1698241451</value>
+  <value>1698594846</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -1730,7 +1730,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="dataSlaveMapParam">
    <type>java.lang.String</type>
-   <value><![CDATA[<address-map><slave name='SDRAM_ctrl.s1' start='0x1000000' end='0x2000000' type='altera_avalon_new_sdram_controller.s1' /><slave name='CPU.debug_mem_slave' start='0x2000800' end='0x2001000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='PLL.pll_slave' start='0x2001000' end='0x2001010' type='altpll.pll_slave' /><slave name='parallel_port_buttons.av' start='0x2001010' end='0x2001018' type='Parallel_Port.av' /><slave name='parallel_port_led3.av' start='0x2001018' end='0x2001020' type='Parallel_Port.av' /><slave name='parallel_port_led2.av' start='0x2001020' end='0x2001028' type='Parallel_Port.av' /><slave name='sysid.control_slave' start='0x2001028' end='0x2001030' type='altera_avalon_sysid_qsys.control_slave' /><slave name='jtag_uart.avalon_jtag_slave' start='0x2001030' end='0x2001038' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></value>
+   <value><![CDATA[<address-map><slave name='SDRAM_ctrl.s1' start='0x1000000' end='0x2000000' type='altera_avalon_new_sdram_controller.s1' /><slave name='CPU.debug_mem_slave' start='0x2000800' end='0x2001000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='PLL.pll_slave' start='0x2001000' end='0x2001010' type='altpll.pll_slave' /><slave name='parallel_port_led_row3.av' start='0x2001010' end='0x2001018' type='Parallel_Port.av' /><slave name='parallel_port_led_row2.av' start='0x2001018' end='0x2001020' type='Parallel_Port.av' /><slave name='parallel_port_buttons.av' start='0x2001020' end='0x2001028' type='Parallel_Port.av' /><slave name='sysid.control_slave' start='0x2001028' end='0x2001030' type='altera_avalon_sysid_qsys.control_slave' /><slave name='jtag_uart.avalon_jtag_slave' start='0x2001030' end='0x2001038' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -2404,25 +2404,25 @@ parameters are a RESULT of the module parameters. -->
    </port>
    <memoryBlock>
     <isBridge>false</isBridge>
-    <moduleName>parallel_port_led2</moduleName>
+    <moduleName>parallel_port_buttons</moduleName>
     <slaveName>av</slaveName>
-    <name>parallel_port_led2.av</name>
+    <name>parallel_port_buttons.av</name>
     <baseAddress>33558560</baseAddress>
     <span>8</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
-    <moduleName>parallel_port_led3</moduleName>
+    <moduleName>parallel_port_led_row2</moduleName>
     <slaveName>av</slaveName>
-    <name>parallel_port_led3.av</name>
+    <name>parallel_port_led_row2.av</name>
     <baseAddress>33558552</baseAddress>
     <span>8</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
-    <moduleName>parallel_port_buttons</moduleName>
+    <moduleName>parallel_port_led_row3</moduleName>
     <slaveName>av</slaveName>
-    <name>parallel_port_buttons.av</name>
+    <name>parallel_port_led_row3.av</name>
     <baseAddress>33558544</baseAddress>
     <span>8</span>
    </memoryBlock>
@@ -2846,23 +2846,23 @@ parameters are a RESULT of the module parameters. -->
    </port>
    <interrupt>
     <isBridge>false</isBridge>
-    <moduleName>parallel_port_led2</moduleName>
+    <moduleName>parallel_port_buttons</moduleName>
     <slaveName>interrupt_sender</slaveName>
-    <name>parallel_port_led2.interrupt_sender</name>
-    <interruptNumber>0</interruptNumber>
+    <name>parallel_port_buttons.interrupt_sender</name>
+    <interruptNumber>1</interruptNumber>
    </interrupt>
    <interrupt>
     <isBridge>false</isBridge>
-    <moduleName>parallel_port_led3</moduleName>
+    <moduleName>parallel_port_led_row2</moduleName>
     <slaveName>interrupt_sender</slaveName>
-    <name>parallel_port_led3.interrupt_sender</name>
+    <name>parallel_port_led_row2.interrupt_sender</name>
     <interruptNumber>2</interruptNumber>
    </interrupt>
    <interrupt>
     <isBridge>false</isBridge>
-    <moduleName>parallel_port_buttons</moduleName>
+    <moduleName>parallel_port_led_row3</moduleName>
     <slaveName>interrupt_sender</slaveName>
-    <name>parallel_port_buttons.interrupt_sender</name>
+    <name>parallel_port_led_row3.interrupt_sender</name>
     <interruptNumber>3</interruptNumber>
    </interrupt>
    <interrupt>
@@ -2870,7 +2870,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>jtag_uart</moduleName>
     <slaveName>irq</slaveName>
     <name>jtag_uart.irq</name>
-    <interruptNumber>1</interruptNumber>
+    <interruptNumber>0</interruptNumber>
    </interrupt>
   </interface>
   <interface name="debug_reset_request" kind="reset_source" version="18.1">
@@ -5302,21 +5302,21 @@ parameters are a RESULT of the module parameters. -->
    </clockDomainMember>
    <clockDomainMember>
     <isBridge>false</isBridge>
-    <moduleName>parallel_port_led2</moduleName>
-    <slaveName>clock</slaveName>
-    <name>parallel_port_led2.clock</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>parallel_port_led3</moduleName>
-    <slaveName>clock</slaveName>
-    <name>parallel_port_led3.clock</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
     <moduleName>parallel_port_buttons</moduleName>
     <slaveName>clock</slaveName>
     <name>parallel_port_buttons.clock</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>parallel_port_led_row2</moduleName>
+    <slaveName>clock</slaveName>
+    <name>parallel_port_led_row2.clock</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>parallel_port_led_row3</moduleName>
+    <slaveName>clock</slaveName>
+    <name>parallel_port_led_row3.clock</name>
    </clockDomainMember>
   </interface>
   <interface name="c2" kind="clock_source" version="18.1">
@@ -7977,10 +7977,10 @@ parameters are a RESULT of the module parameters. -->
   </interface>
  </module>
  <module
-   name="parallel_port_led2"
+   name="parallel_port_led_row2"
    kind="Parallel_Port"
    version="1.0"
-   path="parallel_port_led2">
+   path="parallel_port_led_row2">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
   <parameter name="deviceFamily">
@@ -8578,10 +8578,10 @@ parameters are a RESULT of the module parameters. -->
   </interface>
  </module>
  <module
-   name="parallel_port_led3"
+   name="parallel_port_led_row3"
    kind="Parallel_Port"
    version="1.0"
-   path="parallel_port_led3">
+   path="parallel_port_led_row3">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
   <parameter name="deviceFamily">
@@ -9191,7 +9191,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.TIMESTAMP</name>
-   <value>1698241451</value>
+   <value>1698594846</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -9211,7 +9211,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.timestamp</name>
-   <value>1698241451</value>
+   <value>1698594846</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -9227,7 +9227,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="timestamp">
    <type>int</type>
-   <value>1698241451</value>
+   <value>1698594846</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>false</visible>
@@ -9685,11 +9685,11 @@ parameters are a RESULT of the module parameters. -->
   </interface>
  </module>
  <connection
-   name="CPU.data_master/parallel_port_led2.av"
+   name="CPU.data_master/parallel_port_buttons.av"
    kind="avalon"
    version="18.1"
    start="CPU.data_master"
-   end="parallel_port_led2.av">
+   end="parallel_port_buttons.av">
   <parameter name="arbitrationPriority">
    <type>int</type>
    <value>1</value>
@@ -9732,15 +9732,15 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <startModule>CPU</startModule>
   <startConnectionPoint>data_master</startConnectionPoint>
-  <endModule>parallel_port_led2</endModule>
+  <endModule>parallel_port_buttons</endModule>
   <endConnectionPoint>av</endConnectionPoint>
  </connection>
  <connection
-   name="CPU.data_master/parallel_port_led3.av"
+   name="CPU.data_master/parallel_port_led_row2.av"
    kind="avalon"
    version="18.1"
    start="CPU.data_master"
-   end="parallel_port_led3.av">
+   end="parallel_port_led_row2.av">
   <parameter name="arbitrationPriority">
    <type>int</type>
    <value>1</value>
@@ -9783,15 +9783,15 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <startModule>CPU</startModule>
   <startConnectionPoint>data_master</startConnectionPoint>
-  <endModule>parallel_port_led3</endModule>
+  <endModule>parallel_port_led_row2</endModule>
   <endConnectionPoint>av</endConnectionPoint>
  </connection>
  <connection
-   name="CPU.data_master/parallel_port_buttons.av"
+   name="CPU.data_master/parallel_port_led_row3.av"
    kind="avalon"
    version="18.1"
    start="CPU.data_master"
-   end="parallel_port_buttons.av">
+   end="parallel_port_led_row3.av">
   <parameter name="arbitrationPriority">
    <type>int</type>
    <value>1</value>
@@ -9834,7 +9834,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <startModule>CPU</startModule>
   <startConnectionPoint>data_master</startConnectionPoint>
-  <endModule>parallel_port_buttons</endModule>
+  <endModule>parallel_port_led_row3</endModule>
   <endConnectionPoint>av</endConnectionPoint>
  </connection>
  <connection
@@ -10303,60 +10303,6 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="PLL.c0/parallel_port_led2.clock"
-   kind="clock"
-   version="18.1"
-   start="PLL.c0"
-   end="parallel_port_led2.clock">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>PLL</startModule>
-  <startConnectionPoint>c0</startConnectionPoint>
-  <endModule>parallel_port_led2</endModule>
-  <endConnectionPoint>clock</endConnectionPoint>
- </connection>
- <connection
-   name="PLL.c0/parallel_port_led3.clock"
-   kind="clock"
-   version="18.1"
-   start="PLL.c0"
-   end="parallel_port_led3.clock">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>PLL</startModule>
-  <startConnectionPoint>c0</startConnectionPoint>
-  <endModule>parallel_port_led3</endModule>
-  <endConnectionPoint>clock</endConnectionPoint>
- </connection>
- <connection
    name="PLL.c0/parallel_port_buttons.clock"
    kind="clock"
    version="18.1"
@@ -10381,6 +10327,60 @@ parameters are a RESULT of the module parameters. -->
   <startModule>PLL</startModule>
   <startConnectionPoint>c0</startConnectionPoint>
   <endModule>parallel_port_buttons</endModule>
+  <endConnectionPoint>clock</endConnectionPoint>
+ </connection>
+ <connection
+   name="PLL.c0/parallel_port_led_row2.clock"
+   kind="clock"
+   version="18.1"
+   start="PLL.c0"
+   end="parallel_port_led_row2.clock">
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>PLL</startModule>
+  <startConnectionPoint>c0</startConnectionPoint>
+  <endModule>parallel_port_led_row2</endModule>
+  <endConnectionPoint>clock</endConnectionPoint>
+ </connection>
+ <connection
+   name="PLL.c0/parallel_port_led_row3.clock"
+   kind="clock"
+   version="18.1"
+   start="PLL.c0"
+   end="parallel_port_led_row3.clock">
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>PLL</startModule>
+  <startConnectionPoint>c0</startConnectionPoint>
+  <endModule>parallel_port_led_row3</endModule>
   <endConnectionPoint>clock</endConnectionPoint>
  </connection>
  <connection
@@ -10411,76 +10411,6 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>inclk_interface</endConnectionPoint>
  </connection>
  <connection
-   name="CPU.irq/parallel_port_led2.interrupt_sender"
-   kind="interrupt"
-   version="18.1"
-   start="CPU.irq"
-   end="parallel_port_led2.interrupt_sender">
-  <parameter name="irqNumber">
-   <type>int</type>
-   <value>0</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>CPU</startModule>
-  <startConnectionPoint>irq</startConnectionPoint>
-  <endModule>parallel_port_led2</endModule>
-  <endConnectionPoint>interrupt_sender</endConnectionPoint>
- </connection>
- <connection
-   name="CPU.irq/parallel_port_led3.interrupt_sender"
-   kind="interrupt"
-   version="18.1"
-   start="CPU.irq"
-   end="parallel_port_led3.interrupt_sender">
-  <parameter name="irqNumber">
-   <type>int</type>
-   <value>2</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>CPU</startModule>
-  <startConnectionPoint>irq</startConnectionPoint>
-  <endModule>parallel_port_led3</endModule>
-  <endConnectionPoint>interrupt_sender</endConnectionPoint>
- </connection>
- <connection
    name="CPU.irq/parallel_port_buttons.interrupt_sender"
    kind="interrupt"
    version="18.1"
@@ -10488,7 +10418,7 @@ parameters are a RESULT of the module parameters. -->
    end="parallel_port_buttons.interrupt_sender">
   <parameter name="irqNumber">
    <type>int</type>
-   <value>3</value>
+   <value>1</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -10516,6 +10446,76 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>interrupt_sender</endConnectionPoint>
  </connection>
  <connection
+   name="CPU.irq/parallel_port_led_row2.interrupt_sender"
+   kind="interrupt"
+   version="18.1"
+   start="CPU.irq"
+   end="parallel_port_led_row2.interrupt_sender">
+  <parameter name="irqNumber">
+   <type>int</type>
+   <value>2</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>CPU</startModule>
+  <startConnectionPoint>irq</startConnectionPoint>
+  <endModule>parallel_port_led_row2</endModule>
+  <endConnectionPoint>interrupt_sender</endConnectionPoint>
+ </connection>
+ <connection
+   name="CPU.irq/parallel_port_led_row3.interrupt_sender"
+   kind="interrupt"
+   version="18.1"
+   start="CPU.irq"
+   end="parallel_port_led_row3.interrupt_sender">
+  <parameter name="irqNumber">
+   <type>int</type>
+   <value>3</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>CPU</startModule>
+  <startConnectionPoint>irq</startConnectionPoint>
+  <endModule>parallel_port_led_row3</endModule>
+  <endConnectionPoint>interrupt_sender</endConnectionPoint>
+ </connection>
+ <connection
    name="CPU.irq/jtag_uart.irq"
    kind="interrupt"
    version="18.1"
@@ -10523,7 +10523,7 @@ parameters are a RESULT of the module parameters. -->
    end="jtag_uart.irq">
   <parameter name="irqNumber">
    <type>int</type>
-   <value>1</value>
+   <value>0</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -10659,60 +10659,6 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>reset</endConnectionPoint>
  </connection>
  <connection
-   name="clk_0.clk_reset/parallel_port_led2.reset"
-   kind="reset"
-   version="18.1"
-   start="clk_0.clk_reset"
-   end="parallel_port_led2.reset">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk_reset</startConnectionPoint>
-  <endModule>parallel_port_led2</endModule>
-  <endConnectionPoint>reset</endConnectionPoint>
- </connection>
- <connection
-   name="clk_0.clk_reset/parallel_port_led3.reset"
-   kind="reset"
-   version="18.1"
-   start="clk_0.clk_reset"
-   end="parallel_port_led3.reset">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>clk_0</startModule>
-  <startConnectionPoint>clk_reset</startConnectionPoint>
-  <endModule>parallel_port_led3</endModule>
-  <endConnectionPoint>reset</endConnectionPoint>
- </connection>
- <connection
    name="clk_0.clk_reset/parallel_port_buttons.reset"
    kind="reset"
    version="18.1"
@@ -10737,6 +10683,60 @@ parameters are a RESULT of the module parameters. -->
   <startModule>clk_0</startModule>
   <startConnectionPoint>clk_reset</startConnectionPoint>
   <endModule>parallel_port_buttons</endModule>
+  <endConnectionPoint>reset</endConnectionPoint>
+ </connection>
+ <connection
+   name="clk_0.clk_reset/parallel_port_led_row2.reset"
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="parallel_port_led_row2.reset">
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>clk_0</startModule>
+  <startConnectionPoint>clk_reset</startConnectionPoint>
+  <endModule>parallel_port_led_row2</endModule>
+  <endConnectionPoint>reset</endConnectionPoint>
+ </connection>
+ <connection
+   name="clk_0.clk_reset/parallel_port_led_row3.reset"
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="parallel_port_led_row3.reset">
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>clk_0</startModule>
+  <startConnectionPoint>clk_reset</startConnectionPoint>
+  <endModule>parallel_port_led_row3</endModule>
   <endConnectionPoint>reset</endConnectionPoint>
  </connection>
  <connection
@@ -10872,87 +10872,6 @@ parameters are a RESULT of the module parameters. -->
   <startModule>CPU</startModule>
   <startConnectionPoint>debug_reset_request</startConnectionPoint>
   <endModule>jtag_uart</endModule>
-  <endConnectionPoint>reset</endConnectionPoint>
- </connection>
- <connection
-   name="CPU.debug_reset_request/parallel_port_buttons.reset"
-   kind="reset"
-   version="18.1"
-   start="CPU.debug_reset_request"
-   end="parallel_port_buttons.reset">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>CPU</startModule>
-  <startConnectionPoint>debug_reset_request</startConnectionPoint>
-  <endModule>parallel_port_buttons</endModule>
-  <endConnectionPoint>reset</endConnectionPoint>
- </connection>
- <connection
-   name="CPU.debug_reset_request/parallel_port_led2.reset"
-   kind="reset"
-   version="18.1"
-   start="CPU.debug_reset_request"
-   end="parallel_port_led2.reset">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>CPU</startModule>
-  <startConnectionPoint>debug_reset_request</startConnectionPoint>
-  <endModule>parallel_port_led2</endModule>
-  <endConnectionPoint>reset</endConnectionPoint>
- </connection>
- <connection
-   name="CPU.debug_reset_request/parallel_port_led3.reset"
-   kind="reset"
-   version="18.1"
-   start="CPU.debug_reset_request"
-   end="parallel_port_led3.reset">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>CPU</startModule>
-  <startConnectionPoint>debug_reset_request</startConnectionPoint>
-  <endModule>parallel_port_led3</endModule>
   <endConnectionPoint>reset</endConnectionPoint>
  </connection>
  <plugin>
@@ -11148,7 +11067,7 @@ parameters are a RESULT of the module parameters. -->
   <version>18.1</version>
  </plugin>
  <plugin>
-  <instanceCount>15</instanceCount>
+  <instanceCount>12</instanceCount>
   <name>reset</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IConnection</subtype>

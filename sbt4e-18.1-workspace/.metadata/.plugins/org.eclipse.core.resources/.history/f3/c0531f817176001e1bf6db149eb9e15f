@@ -1,0 +1,70 @@
+/*
+ * counter.c
+ *
+ *  Created on: Oct 24, 2023
+ *      Author: Thomas
+ */
+
+
+#include <stdio.h>
+#include "system.h"
+#include "io.h"
+#include "sys/alt_irq.h"
+#include "priv/alt_legacy_irq.h"
+
+/* Register map for simplePIO */
+#define SIMPLEPIO_REGDIR 0
+#define SIMPLEPIO_REGPIN 1
+#define SIMPLEPIO_REGPORT 2
+#define SIMPLEPIO_REGSET 3
+#define SIMPLEPIO_REGCLR 4
+#define SIMPLEPIO_CLRIRQ 5
+/* If 1 is written: IRQ is cleared and deactivated  */
+/* If 2 is written: IRQ is enabled, but not cleared */
+/* If 3 is written: IRQ is cleared and activated    */
+
+// other defines
+#define DELAY 1000000
+
+static void handle_buttonIRQ(void * context, alt_u32 id) __attribute__ ((section(".exceptions")));
+
+int main(void)
+{
+	// IRQ setup
+	alt_irq_context statusISR;
+	puts("Disable IRQs");
+	statusISR = alt_irq_disable_all();
+	puts("Register timer IRQ handler...");
+	alt_irq_register(2, NULL, (alt_isr_func) handle_buttonIRQ);
+	alt_irq_enable_all(statusISR);
+
+	// setup parallel port direction
+	IOWR_8DIRECT(PARALLEL_PORT_BUTTON_BASE,0,0x00);	// set to input (offset 0, all bits to 1 = output)
+	IOWR_8DIRECT(PARALLEL_PORT_LED2_BASE,0,0xFF);	// set to output (offset 0, all bits to 1 = output)
+	IOWR_8DIRECT(PARALLEL_PORT_LED3_BASE,0,0xFF);	// set to output (offset 0, all bits to 1 = output)
+
+	int counter = 0;
+	unsigned int wait;
+	printf("Lets start counting \n");
+
+	while(1)
+	{
+		counter ++;
+		printf("counter = %d \n",counter);
+		IOWR_8DIRECT(PARALLEL_PORT_LED2_BASE,SIMPLEPIO_REGPORT,counter);
+		// s i l l y busy wait
+		for(wait = 0; wait < DELAY; wait++)
+			asm volatile ("nop");
+		}
+}
+
+static void handle_buttonIRQ(void * context, alt_u32 id) {
+	IOWR_8DIRECT(PARALLEL_PORT_BUTTONS_BASE, SIMPLEPIO_CLRIRQ, 3); // clear the interrupt and re-active it
+
+	// read in the values of the buttons
+	unsigned char value = IORD_8DIRECT(PARALLEL_PORT_BUTTONS_BASE, SIMPLEPIO_REGPIN);
+
+	puts("Button interrupt received.");
+
+	IOWR_8DIRECT(PARALLEL_PORT_LED3_BASE, SIMPLEPIO_REGPORT, value);
+}
