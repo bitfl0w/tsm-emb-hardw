@@ -4,7 +4,7 @@
  * Machine generated for CPU 'CPU' in SOPC Builder design 'lab3_sopc'
  * SOPC Builder design path: ../../lab3_sopc.sopcinfo
  *
- * Generated: Sun Oct 29 16:56:46 CET 2023
+ * Generated: Tue Oct 31 21:13:06 CET 2023
  */
 
 /*
@@ -321,7 +321,7 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1698594846
+#define SYSID_TIMESTAMP 1698782696
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
 
 #endif /* __SYSTEM_H_ */

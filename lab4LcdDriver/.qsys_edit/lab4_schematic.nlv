@@ -1,0 +1,25 @@
+# # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
+# 
+preplace inst lab1_sopc.PLL -pg 1 -lvl 2 -y 440
+preplace inst lab1_sopc.CPU -pg 1 -lvl 1 -y 90
+preplace inst lab1_sopc.SDRAM_ctrl -pg 1 -lvl 2 -y 320
+preplace inst lab1_sopc.CPU.clock_bridge -pg 1
+preplace inst lab1_sopc -pg 1 -lvl 1 -y 40 -regy -20
+preplace inst lab1_sopc.sysid -pg 1 -lvl 2 -y 40
+preplace inst lab1_sopc.clk_0 -pg 1 -lvl 1 -y 440
+preplace inst lab1_sopc.CPU.cpu -pg 1
+preplace inst lab1_sopc.CPU.reset_bridge -pg 1
+preplace inst lab1_sopc.LED -pg 1 -lvl 2 -y 220
+preplace inst lab1_sopc.jtag_uart -pg 1 -lvl 2 -y 120
+preplace netloc EXPORT<net_container>lab1_sopc</net_container>(SLAVE)LED.external_connection,(SLAVE)lab1_sopc.leds) 1 0 2 NJ 250 NJ
+preplace netloc EXPORT<net_container>lab1_sopc</net_container>(SLAVE)SDRAM_ctrl.wire,(SLAVE)lab1_sopc.sdram_ctrl_wire) 1 0 2 NJ 390 NJ
+preplace netloc FAN_OUT<net_container>lab1_sopc</net_container>(SLAVE)SDRAM_ctrl.clk,(MASTER)PLL.c0,(SLAVE)CPU.clk,(SLAVE)sysid.clk,(SLAVE)LED.clk,(SLAVE)jtag_uart.clk) 1 0 3 140 30 580 430 800
+preplace netloc INTERCONNECT<net_container>lab1_sopc</net_container>(SLAVE)sysid.control_slave,(SLAVE)SDRAM_ctrl.s1,(SLAVE)PLL.pll_slave,(SLAVE)CPU.debug_mem_slave,(MASTER)CPU.data_master,(SLAVE)jtag_uart.avalon_jtag_slave,(SLAVE)LED.s1,(MASTER)CPU.instruction_master) 1 0 2 160 50 540
+preplace netloc EXPORT<net_container>lab1_sopc</net_container>(SLAVE)lab1_sopc.reset,(SLAVE)clk_0.clk_in_reset) 1 0 1 NJ
+preplace netloc EXPORT<net_container>lab1_sopc</net_container>(MASTER)PLL.c2,(MASTER)lab1_sopc.sdram_clk) 1 2 1 N
+preplace netloc INTERCONNECT<net_container>lab1_sopc</net_container>(MASTER)CPU.debug_reset_request,(MASTER)clk_0.clk_reset,(SLAVE)PLL.inclk_interface_reset,(SLAVE)sysid.reset,(SLAVE)SDRAM_ctrl.reset,(SLAVE)LED.reset,(SLAVE)jtag_uart.reset,(SLAVE)CPU.reset) 1 0 2 160 230 520
+preplace netloc EXPORT<net_container>lab1_sopc</net_container>(SLAVE)clk_0.clk_in,(SLAVE)lab1_sopc.clk) 1 0 1 NJ
+preplace netloc POINT_TO_POINT<net_container>lab1_sopc</net_container>(SLAVE)jtag_uart.irq,(MASTER)CPU.irq) 1 1 1 560
+preplace netloc POINT_TO_POINT<net_container>lab1_sopc</net_container>(MASTER)clk_0.clk,(SLAVE)PLL.inclk_interface) 1 1 1 N
+levelinfo -pg 1 0 110 910
+levelinfo -hier lab1_sopc 120 280 610 820
