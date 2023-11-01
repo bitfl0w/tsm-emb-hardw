@@ -4,7 +4,7 @@
  * Machine generated for CPU 'CPU' in SOPC Builder design 'lab3_sopc'
  * SOPC Builder design path: ../../lab3_sopc.sopcinfo
  *
- * Generated: Tue Oct 31 21:13:06 CET 2023
+ * Generated: Wed Nov 01 13:15:36 CET 2023
  */
 
 /*
@@ -274,8 +274,8 @@
 
 #define ALT_MODULE_CLASS_parallel_port_buttons Parallel_Port
 #define PARALLEL_PORT_BUTTONS_BASE 0x2001020
-#define PARALLEL_PORT_BUTTONS_IRQ -1
-#define PARALLEL_PORT_BUTTONS_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define PARALLEL_PORT_BUTTONS_IRQ 1
+#define PARALLEL_PORT_BUTTONS_IRQ_INTERRUPT_CONTROLLER_ID 0
 #define PARALLEL_PORT_BUTTONS_NAME "/dev/parallel_port_buttons"
 #define PARALLEL_PORT_BUTTONS_SPAN 8
 #define PARALLEL_PORT_BUTTONS_TYPE "Parallel_Port"
@@ -288,8 +288,8 @@
 
 #define ALT_MODULE_CLASS_parallel_port_led_row2 Parallel_Port
 #define PARALLEL_PORT_LED_ROW2_BASE 0x2001018
-#define PARALLEL_PORT_LED_ROW2_IRQ -1
-#define PARALLEL_PORT_LED_ROW2_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define PARALLEL_PORT_LED_ROW2_IRQ 2
+#define PARALLEL_PORT_LED_ROW2_IRQ_INTERRUPT_CONTROLLER_ID 0
 #define PARALLEL_PORT_LED_ROW2_NAME "/dev/parallel_port_led_row2"
 #define PARALLEL_PORT_LED_ROW2_SPAN 8
 #define PARALLEL_PORT_LED_ROW2_TYPE "Parallel_Port"
@@ -302,8 +302,8 @@
 
 #define ALT_MODULE_CLASS_parallel_port_led_row3 Parallel_Port
 #define PARALLEL_PORT_LED_ROW3_BASE 0x2001010
-#define PARALLEL_PORT_LED_ROW3_IRQ -1
-#define PARALLEL_PORT_LED_ROW3_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define PARALLEL_PORT_LED_ROW3_IRQ 3
+#define PARALLEL_PORT_LED_ROW3_IRQ_INTERRUPT_CONTROLLER_ID 0
 #define PARALLEL_PORT_LED_ROW3_NAME "/dev/parallel_port_led_row3"
 #define PARALLEL_PORT_LED_ROW3_SPAN 8
 #define PARALLEL_PORT_LED_ROW3_TYPE "Parallel_Port"
@@ -321,7 +321,7 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1698782696
+#define SYSID_TIMESTAMP 1698840639
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
 
 #endif /* __SYSTEM_H_ */

@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Oct 31, 2023 9:13:02 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1698783183059</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Nov 1, 2023 1:15:34 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1698840934397</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\git\tsm-emb-hardw\lab3PIO\software\lab3_pio_port_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\lab3_sopc.sopcinfo</SopcDesignFile>
