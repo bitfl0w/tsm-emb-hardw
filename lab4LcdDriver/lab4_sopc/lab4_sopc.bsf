@@ -1,0 +1,204 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 0 0 432 448)
+	(text "lab4_sopc" (rect 187 -1 228 11)(font "Arial" (font_size 10)))
+	(text "inst" (rect 8 432 20 444)(font "Arial" ))
+	(port
+		(pt 0 72)
+		(input)
+		(text "clk_clk" (rect 0 0 27 12)(font "Arial" (font_size 8)))
+		(text "clk_clk" (rect 4 61 46 72)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 160 72)(line_width 1))
+	)
+	(port
+		(pt 0 248)
+		(input)
+		(text "reset_reset_n" (rect 0 0 56 12)(font "Arial" (font_size 8)))
+		(text "reset_reset_n" (rect 4 237 82 248)(font "Arial" (font_size 8)))
+		(line (pt 0 248)(pt 160 248)(line_width 1))
+	)
+	(port
+		(pt 0 112)
+		(output)
+		(text "ldc_driver_chipselectbar" (rect 0 0 96 12)(font "Arial" (font_size 8)))
+		(text "ldc_driver_chipselectbar" (rect 4 101 148 112)(font "Arial" (font_size 8)))
+		(line (pt 0 112)(pt 160 112)(line_width 1))
+	)
+	(port
+		(pt 0 144)
+		(output)
+		(text "ldc_driver_datacommandbar" (rect 0 0 115 12)(font "Arial" (font_size 8)))
+		(text "ldc_driver_datacommandbar" (rect 4 133 154 144)(font "Arial" (font_size 8)))
+		(line (pt 0 144)(pt 160 144)(line_width 1))
+	)
+	(port
+		(pt 0 160)
+		(output)
+		(text "ldc_driver_im0" (rect 0 0 60 12)(font "Arial" (font_size 8)))
+		(text "ldc_driver_im0" (rect 4 149 88 160)(font "Arial" (font_size 8)))
+		(line (pt 0 160)(pt 160 160)(line_width 1))
+	)
+	(port
+		(pt 0 176)
+		(output)
+		(text "ldc_driver_readbar" (rect 0 0 76 12)(font "Arial" (font_size 8)))
+		(text "ldc_driver_readbar" (rect 4 165 112 176)(font "Arial" (font_size 8)))
+		(line (pt 0 176)(pt 160 176)(line_width 1))
+	)
+	(port
+		(pt 0 192)
+		(output)
+		(text "ldc_driver_resetbar" (rect 0 0 79 12)(font "Arial" (font_size 8)))
+		(text "ldc_driver_resetbar" (rect 4 181 118 192)(font "Arial" (font_size 8)))
+		(line (pt 0 192)(pt 160 192)(line_width 1))
+	)
+	(port
+		(pt 0 208)
+		(output)
+		(text "ldc_driver_writebar" (rect 0 0 76 12)(font "Arial" (font_size 8)))
+		(text "ldc_driver_writebar" (rect 4 197 118 208)(font "Arial" (font_size 8)))
+		(line (pt 0 208)(pt 160 208)(line_width 1))
+	)
+	(port
+		(pt 432 72)
+		(output)
+		(text "sdram_clk_clk" (rect 0 0 59 12)(font "Arial" (font_size 8)))
+		(text "sdram_clk_clk" (rect 360 61 438 72)(font "Arial" (font_size 8)))
+		(line (pt 432 72)(pt 272 72)(line_width 1))
+	)
+	(port
+		(pt 0 288)
+		(output)
+		(text "sdram_ctrl_wire_addr[11..0]" (rect 0 0 110 12)(font "Arial" (font_size 8)))
+		(text "sdram_ctrl_wire_addr[11..0]" (rect 4 277 166 288)(font "Arial" (font_size 8)))
+		(line (pt 0 288)(pt 160 288)(line_width 3))
+	)
+	(port
+		(pt 0 304)
+		(output)
+		(text "sdram_ctrl_wire_ba[1..0]" (rect 0 0 99 12)(font "Arial" (font_size 8)))
+		(text "sdram_ctrl_wire_ba[1..0]" (rect 4 293 148 304)(font "Arial" (font_size 8)))
+		(line (pt 0 304)(pt 160 304)(line_width 3))
+	)
+	(port
+		(pt 0 320)
+		(output)
+		(text "sdram_ctrl_wire_cas_n" (rect 0 0 95 12)(font "Arial" (font_size 8)))
+		(text "sdram_ctrl_wire_cas_n" (rect 4 309 130 320)(font "Arial" (font_size 8)))
+		(line (pt 0 320)(pt 160 320)(line_width 1))
+	)
+	(port
+		(pt 0 336)
+		(output)
+		(text "sdram_ctrl_wire_cke" (rect 0 0 84 12)(font "Arial" (font_size 8)))
+		(text "sdram_ctrl_wire_cke" (rect 4 325 118 336)(font "Arial" (font_size 8)))
+		(line (pt 0 336)(pt 160 336)(line_width 1))
+	)
+	(port
+		(pt 0 352)
+		(output)
+		(text "sdram_ctrl_wire_cs_n" (rect 0 0 90 12)(font "Arial" (font_size 8)))
+		(text "sdram_ctrl_wire_cs_n" (rect 4 341 124 352)(font "Arial" (font_size 8)))
+		(line (pt 0 352)(pt 160 352)(line_width 1))
+	)
+	(port
+		(pt 0 384)
+		(output)
+		(text "sdram_ctrl_wire_dqm[1..0]" (rect 0 0 107 12)(font "Arial" (font_size 8)))
+		(text "sdram_ctrl_wire_dqm[1..0]" (rect 4 373 154 384)(font "Arial" (font_size 8)))
+		(line (pt 0 384)(pt 160 384)(line_width 3))
+	)
+	(port
+		(pt 0 400)
+		(output)
+		(text "sdram_ctrl_wire_ras_n" (rect 0 0 94 12)(font "Arial" (font_size 8)))
+		(text "sdram_ctrl_wire_ras_n" (rect 4 389 130 400)(font "Arial" (font_size 8)))
+		(line (pt 0 400)(pt 160 400)(line_width 1))
+	)
+	(port
+		(pt 0 416)
+		(output)
+		(text "sdram_ctrl_wire_we_n" (rect 0 0 92 12)(font "Arial" (font_size 8)))
+		(text "sdram_ctrl_wire_we_n" (rect 4 405 124 416)(font "Arial" (font_size 8)))
+		(line (pt 0 416)(pt 160 416)(line_width 1))
+	)
+	(port
+		(pt 0 128)
+		(bidir)
+		(text "ldc_driver_databus[15..0]" (rect 0 0 100 12)(font "Arial" (font_size 8)))
+		(text "ldc_driver_databus[15..0]" (rect 4 117 154 128)(font "Arial" (font_size 8)))
+		(line (pt 0 128)(pt 160 128)(line_width 3))
+	)
+	(port
+		(pt 0 368)
+		(bidir)
+		(text "sdram_ctrl_wire_dq[15..0]" (rect 0 0 103 12)(font "Arial" (font_size 8)))
+		(text "sdram_ctrl_wire_dq[15..0]" (rect 4 357 154 368)(font "Arial" (font_size 8)))
+		(line (pt 0 368)(pt 160 368)(line_width 3))
+	)
+	(drawing
+		(text "clk" (rect 145 43 308 99)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 165 67 348 144)(font "Arial" (color 0 0 0)))
+		(text "ldc_driver" (rect 104 83 268 179)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "chipselectbar" (rect 165 107 408 224)(font "Arial" (color 0 0 0)))
+		(text "databus" (rect 165 123 372 256)(font "Arial" (color 0 0 0)))
+		(text "datacommandbar" (rect 165 139 414 288)(font "Arial" (color 0 0 0)))
+		(text "im0" (rect 165 155 348 320)(font "Arial" (color 0 0 0)))
+		(text "readbar" (rect 165 171 372 352)(font "Arial" (color 0 0 0)))
+		(text "resetbar" (rect 165 187 378 384)(font "Arial" (color 0 0 0)))
+		(text "writebar" (rect 165 203 378 416)(font "Arial" (color 0 0 0)))
+		(text "reset" (rect 131 219 292 451)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "reset_n" (rect 165 243 372 496)(font "Arial" (color 0 0 0)))
+		(text "sdram_clk" (rect 273 43 600 99)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 257 67 532 144)(font "Arial" (color 0 0 0)))
+		(text "sdram_ctrl_wire" (rect 65 259 220 531)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "addr" (rect 165 283 354 576)(font "Arial" (color 0 0 0)))
+		(text "ba" (rect 165 299 342 608)(font "Arial" (color 0 0 0)))
+		(text "cas_n" (rect 165 315 360 640)(font "Arial" (color 0 0 0)))
+		(text "cke" (rect 165 331 348 672)(font "Arial" (color 0 0 0)))
+		(text "cs_n" (rect 165 347 354 704)(font "Arial" (color 0 0 0)))
+		(text "dq" (rect 165 363 342 736)(font "Arial" (color 0 0 0)))
+		(text "dqm" (rect 165 379 348 768)(font "Arial" (color 0 0 0)))
+		(text "ras_n" (rect 165 395 360 800)(font "Arial" (color 0 0 0)))
+		(text "we_n" (rect 165 411 354 832)(font "Arial" (color 0 0 0)))
+		(text " lab4_sopc " (rect 385 432 836 874)(font "Arial" ))
+		(line (pt 160 32)(pt 272 32)(line_width 1))
+		(line (pt 272 32)(pt 272 432)(line_width 1))
+		(line (pt 160 432)(pt 272 432)(line_width 1))
+		(line (pt 160 32)(pt 160 432)(line_width 1))
+		(line (pt 161 52)(pt 161 76)(line_width 1))
+		(line (pt 162 52)(pt 162 76)(line_width 1))
+		(line (pt 161 92)(pt 161 212)(line_width 1))
+		(line (pt 162 92)(pt 162 212)(line_width 1))
+		(line (pt 161 228)(pt 161 252)(line_width 1))
+		(line (pt 162 228)(pt 162 252)(line_width 1))
+		(line (pt 271 52)(pt 271 76)(line_width 1))
+		(line (pt 270 52)(pt 270 76)(line_width 1))
+		(line (pt 161 268)(pt 161 420)(line_width 1))
+		(line (pt 162 268)(pt 162 420)(line_width 1))
+		(line (pt 0 0)(pt 432 0)(line_width 1))
+		(line (pt 432 0)(pt 432 448)(line_width 1))
+		(line (pt 0 448)(pt 432 448)(line_width 1))
+		(line (pt 0 0)(pt 0 448)(line_width 1))
+	)
+)

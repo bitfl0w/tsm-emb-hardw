@@ -49,6 +49,6 @@ set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
 set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name QSYS_FILE lab4_sopc.qsys
 set_global_assignment -name TCL_SCRIPT_FILE lcd.tcl
-set_global_assignment -name QSYS_FILE lab4_ldcDriver.qsys
 set_global_assignment -name BDF_FILE lab4_ldcDriver.bdf
