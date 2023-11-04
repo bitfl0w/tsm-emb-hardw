@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="REG" key="selection"/>
+		<item value="&#x09;while (counter&lt;10000000){}   // include delay of at least 120 ms use your timer or a loop" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="&#x09;while (counter&lt;10000000){}   // include delay of at least 120 ms use your timer or a loop"/>
 			<item value="REG"/>
 		</list>
 		<list key="replacehistory">
