@@ -51,7 +51,7 @@ set_location_assignment PIN_A18  -to ldc_driver_resetbar
 set_location_assignment PIN_G14  -to ldc_driver_chipselectbar
 set_location_assignment PIN_H14  -to ldc_driver_datacommandbar
 set_location_assignment PIN_G15  -to ldc_driver_writebar
-set_location_assignment PIN_H15  -to ldc_driver_writebar
+set_location_assignment PIN_H15  -to ldc_driver_readbar
 set_location_assignment PIN_G13  -to ldc_driver_im0
 set_location_assignment PIN_G16  -to ldc_driver_databus[0]
 set_location_assignment PIN_E12  -to ldc_driver_databus[0]

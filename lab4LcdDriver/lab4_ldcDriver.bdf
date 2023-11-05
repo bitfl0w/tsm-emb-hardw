@@ -284,6 +284,7 @@ refer to the applicable agreement for further details.
 		(line (pt 106 4)(pt 102 8))
 	)
 	(rotate180)
+	(annotation_block (location)(rect 584 408 648 432))
 )
 (pin
 	(output)

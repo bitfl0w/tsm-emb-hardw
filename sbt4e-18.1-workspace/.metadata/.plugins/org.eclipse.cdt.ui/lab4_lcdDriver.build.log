@@ -1,9 +1,9 @@
-17:23:26 **** Incremental Build of configuration Nios II for project lab4_lcdDriver ****
+21:36:01 **** Incremental Build of configuration Nios II for project lab4_lcdDriver ****
 make all 
 Info: Building ../lab4_lcdDriver_bsp/
 C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../lab4_lcdDriver_bsp/
 [BSP build complete]
 [lab4_lcdDriver build complete]
 
-17:23:27 Build Finished (took 808ms)
+21:36:02 Build Finished (took 811ms)
 

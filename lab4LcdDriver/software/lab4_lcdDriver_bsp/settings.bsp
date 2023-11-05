@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>04.11.2023 17:22:14</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1699114934287</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>05.11.2023 21:35:08</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1699216508289</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\git\tsm-emb-hardw\lab4LcdDriver\software\lab4_lcdDriver_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\lab4_sopc.sopcinfo</SopcDesignFile>

@@ -55,7 +55,7 @@ set_global_assignment -name BDF_FILE lab4_ldcDriver.bdf
 set_location_assignment PIN_A18 -to ldc_driver_resetbar
 set_location_assignment PIN_G14 -to ldc_driver_chipselectbar
 set_location_assignment PIN_H14 -to ldc_driver_datacommandbar
-set_location_assignment PIN_H15 -to ldc_driver_writebar
+set_location_assignment PIN_G15 -to ldc_driver_writebar
 set_location_assignment PIN_G13 -to ldc_driver_im0
 set_location_assignment PIN_E12 -to ldc_driver_databus[0]
 set_location_assignment PIN_E13 -to ldc_driver_databus[2]
@@ -115,4 +115,5 @@ set_location_assignment PIN_V5 -to SDRAM_WE_n
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_location_assignment PIN_H15 -to ldc_driver_readbar
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
