@@ -1,4 +1,4 @@
 eclipse.preferences.version=1
-newSoftwareExampleWizardPage.defaultLocation=C\:\\git\\tsm-emb-hardw\\lab4LcdDriver\\software\\lab4_lcdDriver
+newSoftwareExampleWizardPage.defaultLocation=C\:\\git\\tsm-emb-hardw\\lab4LcdDriver\\software\\lab4_ldcDriver
 newSoftwareExampleWizardPage.sopcinfoFile=C\:\\git\\tsm-emb-hardw\\lab4LcdDriver\\lab4_sopc.sopcinfo
-newSoftwareExampleWizardPage2.newBspLocation=C\:\\git\\tsm-emb-hardw\\lab4LcdDriver\\software\\lab4_lcdDriver_bsp
+newSoftwareExampleWizardPage2.newBspLocation=C\:\\git\\tsm-emb-hardw\\lab4LcdDriver\\software\\lab4_ldcDriver_bsp

@@ -30,7 +30,7 @@
          type = "String";
       }
    }
-   element LCD_ctrl
+   element LCD_Driver
    {
       datum _sortIndex
       {
@@ -38,11 +38,11 @@
          type = "int";
       }
    }
-   element LCD_ctrl.av
+   element LCD_Driver.av
    {
       datum baseAddress
       {
-         value = "33558528";
+         value = "33558544";
          type = "String";
       }
    }
@@ -63,7 +63,7 @@
    {
       datum baseAddress
       {
-         value = "33558544";
+         value = "33558528";
          type = "String";
       }
    }
@@ -128,6 +128,38 @@
          type = "String";
       }
    }
+   element lab4_sopc
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
+   element lab4_sopc
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
+   element lab4_sopc
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
+   element lab4_sopc
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
    element sysid
    {
       datum _sortIndex
@@ -168,7 +200,7 @@
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
  <interface
    name="ldc_driver"
-   internal="LCD_ctrl.conduit_end"
+   internal="LCD_Driver.conduit_end"
    type="conduit"
    dir="end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
@@ -198,7 +230,7 @@
   <parameter name="dataAddrWidth" value="26" />
   <parameter name="dataMasterHighPerformanceAddrWidth" value="1" />
   <parameter name="dataMasterHighPerformanceMapParam" value="" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='SDRAM_ctrl.s1' start='0x1000000' end='0x2000000' type='altera_avalon_new_sdram_controller.s1' /><slave name='CPU.debug_mem_slave' start='0x2000800' end='0x2001000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='LCD_ctrl.av' start='0x2001000' end='0x2001010' type='LCD_controller.av' /><slave name='PLL.pll_slave' start='0x2001010' end='0x2001020' type='altpll.pll_slave' /><slave name='sysid.control_slave' start='0x2001020' end='0x2001028' type='altera_avalon_sysid_qsys.control_slave' /><slave name='jtag_uart.avalon_jtag_slave' start='0x2001028' end='0x2001030' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='SDRAM_ctrl.s1' start='0x1000000' end='0x2000000' type='altera_avalon_new_sdram_controller.s1' /><slave name='CPU.debug_mem_slave' start='0x2000800' end='0x2001000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='PLL.pll_slave' start='0x2001000' end='0x2001010' type='altpll.pll_slave' /><slave name='LCD_Driver.av' start='0x2001010' end='0x2001020' type='LCD_Driver.av' /><slave name='sysid.control_slave' start='0x2001020' end='0x2001028' type='altera_avalon_sysid_qsys.control_slave' /><slave name='jtag_uart.avalon_jtag_slave' start='0x2001028' end='0x2001030' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
   <parameter name="data_master_high_performance_paddr_base" value="0" />
   <parameter name="data_master_high_performance_paddr_size" value="0" />
   <parameter name="data_master_paddr_base" value="0" />
@@ -356,7 +388,7 @@
   <parameter name="tracefilename" value="" />
   <parameter name="userDefinedSettings" value="" />
  </module>
- <module name="LCD_ctrl" kind="LCD_controller" version="1.0" enabled="1" />
+ <module name="LCD_Driver" kind="LCD_Driver" version="1.0" enabled="1" />
  <module name="PLL" kind="altpll" version="18.1" enabled="1">
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
   <parameter name="AUTO_INCLK_INTERFACE_CLOCK_RATE" value="50000000" />
@@ -589,9 +621,9 @@
    kind="avalon"
    version="18.1"
    start="CPU.data_master"
-   end="LCD_ctrl.av">
+   end="LCD_Driver.av">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x02001000" />
+  <parameter name="baseAddress" value="0x02001010" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -627,7 +659,7 @@
    start="CPU.data_master"
    end="PLL.pll_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x02001010" />
+  <parameter name="baseAddress" value="0x02001000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -661,7 +693,7 @@
  <connection kind="clock" version="18.1" start="PLL.c0" end="jtag_uart.clk" />
  <connection kind="clock" version="18.1" start="PLL.c0" end="sysid.clk" />
  <connection kind="clock" version="18.1" start="PLL.c0" end="CPU.clk" />
- <connection kind="clock" version="18.1" start="PLL.c0" end="LCD_ctrl.clock" />
+ <connection kind="clock" version="18.1" start="PLL.c0" end="LCD_Driver.clock" />
  <connection
    kind="clock"
    version="18.1"
@@ -691,7 +723,7 @@
    kind="reset"
    version="18.1"
    start="clk_0.clk_reset"
-   end="LCD_ctrl.reset" />
+   end="LCD_Driver.reset" />
  <connection
    kind="reset"
    version="18.1"
@@ -721,7 +753,7 @@
    kind="reset"
    version="18.1"
    start="CPU.debug_reset_request"
-   end="LCD_ctrl.reset" />
+   end="LCD_Driver.reset" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.enableEccProtection" value="FALSE" />
  <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />

@@ -1,46 +1,36 @@
-21:35:28 **** Incremental Build of configuration Nios II for project lab4_lcdDriver ****
+21:04:18 **** Incremental Build of configuration Nios II for project lab4_ldcDriver ****
 make all 
-Info: Building ../lab4_lcdDriver_bsp/
-C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../lab4_lcdDriver_bsp/
+Info: Building ../lab4_ldcDriver_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../lab4_ldcDriver_bsp/
 [BSP build complete]
 Info: Compiling main.c to obj/default/main.o
-nios2-elf-gcc -xc -MP -MMD -c -I../lab4_lcdDriver_bsp//HAL/inc -I../lab4_lcdDriver_bsp/ -I../lab4_lcdDriver_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/main.o main.c
-In file included from main.c:10:0:
+nios2-elf-gcc -xc -MP -MMD -c -I../lab4_ldcDriver_bsp//HAL/inc -I../lab4_ldcDriver_bsp/ -I../lab4_ldcDriver_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/main.o main.c
+In file included from main.c:15:0:
 tuxAnimation_1.h:6:63: warning: missing braces around initializer [-Wmissing-braces]
  const unsigned short picture_array_tuxAnimation_1[320][240] = {0x5228,0x000E,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,
                                                                ^
 tuxAnimation_1.h:6:63: note: (near initialization for 'picture_array_tuxAnimation_1')
-In file included from main.c:11:0:
+In file included from main.c:16:0:
 tuxAnimation_2.h:6:63: warning: missing braces around initializer [-Wmissing-braces]
  const unsigned short picture_array_tuxAnimation_2[320][240] = {0x5228,0x000E,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,
                                                                ^
 tuxAnimation_2.h:6:63: note: (near initialization for 'picture_array_tuxAnimation_2')
-In file included from main.c:12:0:
+In file included from main.c:17:0:
 tuxAnimation_3.h:6:63: warning: missing braces around initializer [-Wmissing-braces]
  const unsigned short picture_array_tuxAnimation_3[320][240] = {0x5228,0x000E,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,
                                                                ^
 tuxAnimation_3.h:6:63: note: (near initialization for 'picture_array_tuxAnimation_3')
-main.c: In function 'init_LCD':
-main.c:43:11: warning: unused variable 'counter' [-Wunused-variable]
-  uint32_t counter = 0;
-           ^
-Info: Linking lab4_lcdDriver.elf
-nios2-elf-g++  -T'../lab4_lcdDriver_bsp//linker.x' -msys-crt0='../lab4_lcdDriver_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../lab4_lcdDriver_bsp/   -Wl,-Map=lab4_lcdDriver.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o lab4_lcdDriver.elf obj/default/main.o -lm -msys-lib=m
-nios2-elf-insert lab4_lcdDriver.elf --thread_model hal --cpu_name CPU --qsys true --simulation_enabled false --id 12213761 --sidp 0x2001020 --timestamp 1699216268 --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name lab4_sopc --quartus_project_dir "C:/git/tsm-emb-hardw/lab4LcdDriver" --jdi ../..//output_files/lab4_lcdDriver.jdi --sopcinfo C:/git/tsm-emb-hardw/lab4LcdDriver/software/lab4_lcdDriver_bsp/../../lab4_sopc.sopcinfo
-Info: (lab4_lcdDriver.elf) 519 KBytes program size (code + initialized data).
+Info: Linking lab4_ldcDriver.elf
+nios2-elf-g++  -T'../lab4_ldcDriver_bsp//linker.x' -msys-crt0='../lab4_ldcDriver_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../lab4_ldcDriver_bsp/   -Wl,-Map=lab4_ldcDriver.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o lab4_ldcDriver.elf obj/default/main.o -lm -msys-lib=m
+nios2-elf-insert lab4_ldcDriver.elf --thread_model hal --cpu_name CPU --qsys true --simulation_enabled false --id 12213761 --sidp 0x2001020 --timestamp 1699387258 --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name lab4_sopc --quartus_project_dir "C:/git/tsm-emb-hardw/lab4LcdDriver" --jdi ../..//output_files/lab4_lcdDriver.jdi --sopcinfo C:/git/tsm-emb-hardw/lab4LcdDriver/software/lab4_ldcDriver_bsp/../../lab4_sopc.sopcinfo
+Info: (lab4_ldcDriver.elf) 519 KBytes program size (code + initialized data).
 Info:                      15858 KBytes free for stack + heap.
-Info: Creating lab4_lcdDriver.objdump
-nios2-elf-objdump --disassemble --syms --all-header --source lab4_lcdDriver.elf >lab4_lcdDriver.objdump
-[lab4_lcdDriver build complete]
-21:35:34 **** Incremental Build of configuration Nios II for project lab4_lcdDriver ****
+Info: Creating lab4_ldcDriver.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source lab4_ldcDriver.elf >lab4_ldcDriver.objdump
+[lab4_ldcDriver build complete]
+21:04:27 **** Incremental Build of configuration Nios II for project lab4_ldcDriver ****
 make all 
-Info: Building ../lab4_lcdDriver_bsp/
-C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../lab4_lcdDriver_bsp/
+Info: Building ../lab4_ldcDriver_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../lab4_ldcDriver_bsp/
 [BSP build complete]
-[lab4_lcdDriver build complete]
-21:36:01 **** Incremental Build of configuration Nios II for project lab4_lcdDriver ****
-make all 
-Info: Building ../lab4_lcdDriver_bsp/
-C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../lab4_lcdDriver_bsp/
-[BSP build complete]
-[lab4_lcdDriver build complete]
+[lab4_ldcDriver build complete]

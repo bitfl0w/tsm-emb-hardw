@@ -67,7 +67,13 @@ architecture rtl of lab4_sopc is
 	component lcd_avalon_slave is
 		port (
 			Reset              : in    std_logic                     := 'X';             -- reset
-			Clock              : in    std_logic                     := 'X';             -- clk
+			slave_cs           : in    std_logic                     := 'X';             -- chipselect
+			slave_rd           : in    std_logic                     := 'X';             -- read
+			slave_write_data   : in    std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			slave_read_data    : out   std_logic_vector(31 downto 0);                    -- readdata
+			slave_wait_request : out   std_logic;                                        -- waitrequest
+			slave_we           : in    std_logic                     := 'X';             -- write
+			slave_address      : in    std_logic_vector(1 downto 0)  := (others => 'X'); -- address
 			ChipSelectBar      : out   std_logic;                                        -- chipselectbar
 			DataBus            : inout std_logic_vector(15 downto 0) := (others => 'X'); -- databus
 			DataCommandBar     : out   std_logic;                                        -- datacommandbar
@@ -75,13 +81,7 @@ architecture rtl of lab4_sopc is
 			ReadBar            : out   std_logic;                                        -- readbar
 			ResetBar           : out   std_logic;                                        -- resetbar
 			WriteBar           : out   std_logic;                                        -- writebar
-			slave_cs           : in    std_logic                     := 'X';             -- chipselect
-			slave_we           : in    std_logic                     := 'X';             -- write
-			slave_rd           : in    std_logic                     := 'X';             -- read
-			slave_write_data   : in    std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
-			slave_read_data    : out   std_logic_vector(31 downto 0);                    -- readdata
-			slave_wait_request : out   std_logic;                                        -- waitrequest
-			slave_address      : in    std_logic_vector(1 downto 0)  := (others => 'X')  -- address
+			Clock              : in    std_logic                     := 'X'              -- clk
 		);
 	end component lcd_avalon_slave;
 
@@ -195,13 +195,13 @@ architecture rtl of lab4_sopc is
 			jtag_uart_avalon_jtag_slave_writedata                 : out std_logic_vector(31 downto 0);                    -- writedata
 			jtag_uart_avalon_jtag_slave_waitrequest               : in  std_logic                     := 'X';             -- waitrequest
 			jtag_uart_avalon_jtag_slave_chipselect                : out std_logic;                                        -- chipselect
-			LCD_ctrl_av_address                                   : out std_logic_vector(1 downto 0);                     -- address
-			LCD_ctrl_av_write                                     : out std_logic;                                        -- write
-			LCD_ctrl_av_read                                      : out std_logic;                                        -- read
-			LCD_ctrl_av_readdata                                  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
-			LCD_ctrl_av_writedata                                 : out std_logic_vector(31 downto 0);                    -- writedata
-			LCD_ctrl_av_waitrequest                               : in  std_logic                     := 'X';             -- waitrequest
-			LCD_ctrl_av_chipselect                                : out std_logic;                                        -- chipselect
+			LCD_Driver_av_address                                 : out std_logic_vector(1 downto 0);                     -- address
+			LCD_Driver_av_write                                   : out std_logic;                                        -- write
+			LCD_Driver_av_read                                    : out std_logic;                                        -- read
+			LCD_Driver_av_readdata                                : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			LCD_Driver_av_writedata                               : out std_logic_vector(31 downto 0);                    -- writedata
+			LCD_Driver_av_waitrequest                             : in  std_logic                     := 'X';             -- waitrequest
+			LCD_Driver_av_chipselect                              : out std_logic;                                        -- chipselect
 			PLL_pll_slave_address                                 : out std_logic_vector(1 downto 0);                     -- address
 			PLL_pll_slave_write                                   : out std_logic;                                        -- write
 			PLL_pll_slave_read                                    : out std_logic;                                        -- read
@@ -362,7 +362,7 @@ architecture rtl of lab4_sopc is
 		);
 	end component lab4_sopc_rst_controller_001;
 
-	signal pll_c0_clk                                                    : std_logic;                     -- PLL:c0 -> [CPU:clk, LCD_ctrl:Clock, SDRAM_ctrl:clk, irq_mapper:clk, jtag_uart:clk, mm_interconnect_0:PLL_c0_clk, rst_controller:clk, sysid:clock]
+	signal pll_c0_clk                                                    : std_logic;                     -- PLL:c0 -> [CPU:clk, LCD_Driver:Clock, SDRAM_ctrl:clk, irq_mapper:clk, jtag_uart:clk, mm_interconnect_0:PLL_c0_clk, rst_controller:clk, sysid:clock]
 	signal cpu_data_master_readdata                                      : std_logic_vector(31 downto 0); -- mm_interconnect_0:CPU_data_master_readdata -> CPU:d_readdata
 	signal cpu_data_master_waitrequest                                   : std_logic;                     -- mm_interconnect_0:CPU_data_master_waitrequest -> CPU:d_waitrequest
 	signal cpu_data_master_debugaccess                                   : std_logic;                     -- CPU:debug_mem_slave_debugaccess_to_roms -> mm_interconnect_0:CPU_data_master_debugaccess
@@ -377,13 +377,13 @@ architecture rtl of lab4_sopc is
 	signal cpu_instruction_master_address                                : std_logic_vector(25 downto 0); -- CPU:i_address -> mm_interconnect_0:CPU_instruction_master_address
 	signal cpu_instruction_master_read                                   : std_logic;                     -- CPU:i_read -> mm_interconnect_0:CPU_instruction_master_read
 	signal cpu_instruction_master_readdatavalid                          : std_logic;                     -- mm_interconnect_0:CPU_instruction_master_readdatavalid -> CPU:i_readdatavalid
-	signal mm_interconnect_0_lcd_ctrl_av_chipselect                      : std_logic;                     -- mm_interconnect_0:LCD_ctrl_av_chipselect -> LCD_ctrl:slave_cs
-	signal mm_interconnect_0_lcd_ctrl_av_readdata                        : std_logic_vector(31 downto 0); -- LCD_ctrl:slave_read_data -> mm_interconnect_0:LCD_ctrl_av_readdata
-	signal mm_interconnect_0_lcd_ctrl_av_waitrequest                     : std_logic;                     -- LCD_ctrl:slave_wait_request -> mm_interconnect_0:LCD_ctrl_av_waitrequest
-	signal mm_interconnect_0_lcd_ctrl_av_address                         : std_logic_vector(1 downto 0);  -- mm_interconnect_0:LCD_ctrl_av_address -> LCD_ctrl:slave_address
-	signal mm_interconnect_0_lcd_ctrl_av_read                            : std_logic;                     -- mm_interconnect_0:LCD_ctrl_av_read -> LCD_ctrl:slave_rd
-	signal mm_interconnect_0_lcd_ctrl_av_write                           : std_logic;                     -- mm_interconnect_0:LCD_ctrl_av_write -> LCD_ctrl:slave_we
-	signal mm_interconnect_0_lcd_ctrl_av_writedata                       : std_logic_vector(31 downto 0); -- mm_interconnect_0:LCD_ctrl_av_writedata -> LCD_ctrl:slave_write_data
+	signal mm_interconnect_0_lcd_driver_av_chipselect                    : std_logic;                     -- mm_interconnect_0:LCD_Driver_av_chipselect -> LCD_Driver:slave_cs
+	signal mm_interconnect_0_lcd_driver_av_readdata                      : std_logic_vector(31 downto 0); -- LCD_Driver:slave_read_data -> mm_interconnect_0:LCD_Driver_av_readdata
+	signal mm_interconnect_0_lcd_driver_av_waitrequest                   : std_logic;                     -- LCD_Driver:slave_wait_request -> mm_interconnect_0:LCD_Driver_av_waitrequest
+	signal mm_interconnect_0_lcd_driver_av_address                       : std_logic_vector(1 downto 0);  -- mm_interconnect_0:LCD_Driver_av_address -> LCD_Driver:slave_address
+	signal mm_interconnect_0_lcd_driver_av_read                          : std_logic;                     -- mm_interconnect_0:LCD_Driver_av_read -> LCD_Driver:slave_rd
+	signal mm_interconnect_0_lcd_driver_av_write                         : std_logic;                     -- mm_interconnect_0:LCD_Driver_av_write -> LCD_Driver:slave_we
+	signal mm_interconnect_0_lcd_driver_av_writedata                     : std_logic_vector(31 downto 0); -- mm_interconnect_0:LCD_Driver_av_writedata -> LCD_Driver:slave_write_data
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect      : std_logic;                     -- mm_interconnect_0:jtag_uart_avalon_jtag_slave_chipselect -> jtag_uart:av_chipselect
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_readdata        : std_logic_vector(31 downto 0); -- jtag_uart:av_readdata -> mm_interconnect_0:jtag_uart_avalon_jtag_slave_readdata
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest     : std_logic;                     -- jtag_uart:av_waitrequest -> mm_interconnect_0:jtag_uart_avalon_jtag_slave_waitrequest
@@ -417,7 +417,7 @@ architecture rtl of lab4_sopc is
 	signal mm_interconnect_0_sdram_ctrl_s1_writedata                     : std_logic_vector(15 downto 0); -- mm_interconnect_0:SDRAM_ctrl_s1_writedata -> SDRAM_ctrl:az_data
 	signal irq_mapper_receiver0_irq                                      : std_logic;                     -- jtag_uart:av_irq -> irq_mapper:receiver0_irq
 	signal cpu_irq_irq                                                   : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> CPU:irq
-	signal rst_controller_reset_out_reset                                : std_logic;                     -- rst_controller:reset_out -> [LCD_ctrl:Reset, irq_mapper:reset, mm_interconnect_0:CPU_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
+	signal rst_controller_reset_out_reset                                : std_logic;                     -- rst_controller:reset_out -> [LCD_Driver:Reset, irq_mapper:reset, mm_interconnect_0:CPU_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
 	signal rst_controller_reset_out_reset_req                            : std_logic;                     -- rst_controller:reset_req -> [CPU:reset_req, rst_translator:reset_req_in]
 	signal cpu_debug_reset_request_reset                                 : std_logic;                     -- CPU:debug_reset_request -> [rst_controller:reset_in1, rst_controller_001:reset_in1]
 	signal rst_controller_001_reset_out_reset                            : std_logic;                     -- rst_controller_001:reset_out -> [PLL:reset, mm_interconnect_0:PLL_inclk_interface_reset_reset_bridge_in_reset_reset]
@@ -463,24 +463,24 @@ begin
 			dummy_ci_port                       => open                                               -- custom_instruction_master.readra
 		);
 
-	lcd_ctrl : component lcd_avalon_slave
+	lcd_driver : component lcd_avalon_slave
 		port map (
-			Reset              => rst_controller_reset_out_reset,            --       reset.reset
-			Clock              => pll_c0_clk,                                --       clock.clk
-			ChipSelectBar      => ldc_driver_chipselectbar,                  -- conduit_end.chipselectbar
-			DataBus            => ldc_driver_databus,                        --            .databus
-			DataCommandBar     => ldc_driver_datacommandbar,                 --            .datacommandbar
-			IM0                => ldc_driver_im0,                            --            .im0
-			ReadBar            => ldc_driver_readbar,                        --            .readbar
-			ResetBar           => ldc_driver_resetbar,                       --            .resetbar
-			WriteBar           => ldc_driver_writebar,                       --            .writebar
-			slave_cs           => mm_interconnect_0_lcd_ctrl_av_chipselect,  --          av.chipselect
-			slave_we           => mm_interconnect_0_lcd_ctrl_av_write,       --            .write
-			slave_rd           => mm_interconnect_0_lcd_ctrl_av_read,        --            .read
-			slave_write_data   => mm_interconnect_0_lcd_ctrl_av_writedata,   --            .writedata
-			slave_read_data    => mm_interconnect_0_lcd_ctrl_av_readdata,    --            .readdata
-			slave_wait_request => mm_interconnect_0_lcd_ctrl_av_waitrequest, --            .waitrequest
-			slave_address      => mm_interconnect_0_lcd_ctrl_av_address      --            .address
+			Reset              => rst_controller_reset_out_reset,              --       reset.reset
+			slave_cs           => mm_interconnect_0_lcd_driver_av_chipselect,  --          av.chipselect
+			slave_rd           => mm_interconnect_0_lcd_driver_av_read,        --            .read
+			slave_write_data   => mm_interconnect_0_lcd_driver_av_writedata,   --            .writedata
+			slave_read_data    => mm_interconnect_0_lcd_driver_av_readdata,    --            .readdata
+			slave_wait_request => mm_interconnect_0_lcd_driver_av_waitrequest, --            .waitrequest
+			slave_we           => mm_interconnect_0_lcd_driver_av_write,       --            .write
+			slave_address      => mm_interconnect_0_lcd_driver_av_address,     --            .address
+			ChipSelectBar      => ldc_driver_chipselectbar,                    -- conduit_end.chipselectbar
+			DataBus            => ldc_driver_databus,                          --            .databus
+			DataCommandBar     => ldc_driver_datacommandbar,                   --            .datacommandbar
+			IM0                => ldc_driver_im0,                              --            .im0
+			ReadBar            => ldc_driver_readbar,                          --            .readbar
+			ResetBar           => ldc_driver_resetbar,                         --            .resetbar
+			WriteBar           => ldc_driver_writebar,                         --            .writebar
+			Clock              => pll_c0_clk                                   --       clock.clk
 		);
 
 	pll : component lab4_sopc_PLL
@@ -589,13 +589,13 @@ begin
 			jtag_uart_avalon_jtag_slave_writedata                 => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,   --                                                .writedata
 			jtag_uart_avalon_jtag_slave_waitrequest               => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest, --                                                .waitrequest
 			jtag_uart_avalon_jtag_slave_chipselect                => mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect,  --                                                .chipselect
-			LCD_ctrl_av_address                                   => mm_interconnect_0_lcd_ctrl_av_address,                     --                                     LCD_ctrl_av.address
-			LCD_ctrl_av_write                                     => mm_interconnect_0_lcd_ctrl_av_write,                       --                                                .write
-			LCD_ctrl_av_read                                      => mm_interconnect_0_lcd_ctrl_av_read,                        --                                                .read
-			LCD_ctrl_av_readdata                                  => mm_interconnect_0_lcd_ctrl_av_readdata,                    --                                                .readdata
-			LCD_ctrl_av_writedata                                 => mm_interconnect_0_lcd_ctrl_av_writedata,                   --                                                .writedata
-			LCD_ctrl_av_waitrequest                               => mm_interconnect_0_lcd_ctrl_av_waitrequest,                 --                                                .waitrequest
-			LCD_ctrl_av_chipselect                                => mm_interconnect_0_lcd_ctrl_av_chipselect,                  --                                                .chipselect
+			LCD_Driver_av_address                                 => mm_interconnect_0_lcd_driver_av_address,                   --                                   LCD_Driver_av.address
+			LCD_Driver_av_write                                   => mm_interconnect_0_lcd_driver_av_write,                     --                                                .write
+			LCD_Driver_av_read                                    => mm_interconnect_0_lcd_driver_av_read,                      --                                                .read
+			LCD_Driver_av_readdata                                => mm_interconnect_0_lcd_driver_av_readdata,                  --                                                .readdata
+			LCD_Driver_av_writedata                               => mm_interconnect_0_lcd_driver_av_writedata,                 --                                                .writedata
+			LCD_Driver_av_waitrequest                             => mm_interconnect_0_lcd_driver_av_waitrequest,               --                                                .waitrequest
+			LCD_Driver_av_chipselect                              => mm_interconnect_0_lcd_driver_av_chipselect,                --                                                .chipselect
 			PLL_pll_slave_address                                 => mm_interconnect_0_pll_pll_slave_address,                   --                                   PLL_pll_slave.address
 			PLL_pll_slave_write                                   => mm_interconnect_0_pll_pll_slave_write,                     --                                                .write
 			PLL_pll_slave_read                                    => mm_interconnect_0_pll_pll_slave_read,                      --                                                .read

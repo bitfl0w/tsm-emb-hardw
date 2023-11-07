@@ -27,7 +27,6 @@ end entity lcd_controller;
 
 architecture rtl of lcd_controller is
 
-  -- enumerator
   type STATETYPES is (ActivateReset, WaitReset, ActivateRecover, WaitRecover,
                       Idle, ClockDataOut, WaitWriteLow, WaitWriteHigh,
                       InitRead, WaitReadLow, WaitReadHigh);
