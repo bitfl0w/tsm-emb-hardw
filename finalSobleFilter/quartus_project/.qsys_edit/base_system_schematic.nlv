@@ -1,0 +1,38 @@
+# # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
+# 
+preplace inst base_system.sysid -pg 1 -lvl 3 -y 530
+preplace inst base_system.PLL -pg 1 -lvl 3 -y 950
+preplace inst base_system.vga_dma -pg 1 -lvl 1 -y 650
+preplace inst base_system.CPU.cpu -pg 1
+preplace inst base_system -pg 1 -lvl 1 -y 40 -regy -20
+preplace inst base_system.lcd_ctrl -pg 1 -lvl 1 -y 340
+preplace inst base_system.CPU.reset_bridge -pg 1
+preplace inst base_system.CPU -pg 1 -lvl 2 -y 270
+preplace inst base_system.Systimer -pg 1 -lvl 3 -y 130
+preplace inst base_system.jtag_uart -pg 1 -lvl 3 -y 230
+preplace inst base_system.clk_0 -pg 1 -lvl 2 -y 970
+preplace inst base_system.CPU.clock_bridge -pg 1
+preplace inst base_system.sdram_ctrl -pg 1 -lvl 3 -y 810
+preplace inst base_system.ProfileTimer -pg 1 -lvl 3 -y 30
+preplace inst base_system.i2c_ctrl -pg 1 -lvl 3 -y 330
+preplace inst base_system.dipsw -pg 1 -lvl 3 -y 610
+preplace inst base_system.cam_ctrl -pg 1 -lvl 1 -y 70
+preplace netloc EXPORT<net_container>base_system</net_container>(SLAVE)cam_ctrl.camera,(SLAVE)base_system.cam) 1 0 1 NJ
+preplace netloc EXPORT<net_container>base_system</net_container>(SLAVE)lcd_ctrl.external,(SLAVE)base_system.lcd) 1 0 1 NJ
+preplace netloc EXPORT<net_container>base_system</net_container>(SLAVE)i2c_ctrl.i2c_port,(SLAVE)base_system.i2c) 1 0 3 NJ 40 NJ 40 NJ
+preplace netloc EXPORT<net_container>base_system</net_container>(SLAVE)clk_0.clk_in_reset,(SLAVE)base_system.reset) 1 0 2 NJ 1000 NJ
+preplace netloc EXPORT<net_container>base_system</net_container>(SLAVE)base_system.dipsw,(SLAVE)dipsw.external_connection) 1 0 3 NJ 640 NJ 640 NJ
+preplace netloc INTERCONNECT<net_container>base_system</net_container>(SLAVE)vga_dma.reset,(SLAVE)sdram_ctrl.reset,(SLAVE)i2c_ctrl.reset,(SLAVE)Systimer.reset,(SLAVE)ProfileTimer.reset,(MASTER)CPU.debug_reset_request,(SLAVE)CPU.reset,(SLAVE)lcd_ctrl.reset,(SLAVE)PLL.inclk_interface_reset,(SLAVE)sysid.reset,(SLAVE)dipsw.reset,(SLAVE)jtag_uart.reset,(SLAVE)cam_ctrl.reset,(MASTER)clk_0.clk_reset) 1 0 3 120 330 330 430 830
+preplace netloc EXPORT<net_container>base_system</net_container>(MASTER)PLL.c3,(MASTER)base_system.dac_clk) 1 3 1 NJ
+preplace netloc POINT_TO_POINT<net_container>base_system</net_container>(MASTER)PLL.c4,(SLAVE)vga_dma.pixelclk) 1 0 4 160 900 NJ 900 NJ 940 1080
+preplace netloc EXPORT<net_container>base_system</net_container>(SLAVE)base_system.sdram,(SLAVE)sdram_ctrl.wire) 1 0 3 NJ 880 NJ 880 NJ
+preplace netloc EXPORT<net_container>base_system</net_container>(MASTER)PLL.c1,(MASTER)base_system.mclk) 1 3 1 NJ
+preplace netloc EXPORT<net_container>base_system</net_container>(MASTER)base_system.sdram_clk,(MASTER)PLL.c2) 1 3 1 NJ
+preplace netloc POINT_TO_POINT<net_container>base_system</net_container>(SLAVE)PLL.inclk_interface,(MASTER)clk_0.clk) 1 2 1 N
+preplace netloc FAN_OUT<net_container>base_system</net_container>(SLAVE)ProfileTimer.irq,(SLAVE)cam_ctrl.interrupt,(SLAVE)lcd_ctrl.irq,(SLAVE)i2c_ctrl.irq,(SLAVE)Systimer.irq,(MASTER)CPU.irq,(SLAVE)jtag_uart.irq) 1 0 3 80 60 NJ 60 750
+preplace netloc EXPORT<net_container>base_system</net_container>(SLAVE)vga_dma.vga,(SLAVE)base_system.vga) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>base_system</net_container>(SLAVE)CPU.clk,(SLAVE)vga_dma.clock,(SLAVE)jtag_uart.clk,(SLAVE)sysid.clk,(MASTER)PLL.c0,(SLAVE)Systimer.clk,(SLAVE)dipsw.clk,(SLAVE)cam_ctrl.clock,(SLAVE)sdram_ctrl.clk,(SLAVE)lcd_ctrl.clock,(SLAVE)ProfileTimer.clk,(SLAVE)i2c_ctrl.clock) 1 0 4 100 300 370 410 810 920 1100
+preplace netloc INTERCONNECT<net_container>base_system</net_container>(SLAVE)lcd_ctrl.slave,(SLAVE)Systimer.s1,(SLAVE)ProfileTimer.s1,(SLAVE)i2c_ctrl.slave,(SLAVE)PLL.pll_slave,(MASTER)CPU.instruction_master,(MASTER)lcd_ctrl.master,(SLAVE)vga_dma.slave,(SLAVE)sysid.control_slave,(SLAVE)cam_ctrl.slave,(SLAVE)dipsw.s1,(SLAVE)sdram_ctrl.s1,(MASTER)CPU.data_master,(MASTER)vga_dma.master,(MASTER)cam_ctrl.master,(SLAVE)jtag_uart.avalon_jtag_slave,(SLAVE)CPU.debug_mem_slave) 1 0 3 140 470 350 450 770
+preplace netloc EXPORT<net_container>base_system</net_container>(SLAVE)base_system.clk,(SLAVE)clk_0.clk_in) 1 0 2 NJ 980 NJ
+levelinfo -pg 1 0 50 1210
+levelinfo -hier base_system 60 190 510 890 1120
