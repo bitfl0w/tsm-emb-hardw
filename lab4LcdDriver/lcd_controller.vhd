@@ -1,3 +1,5 @@
+-- lcd_controller.vhdl
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -72,7 +74,7 @@ begin
     end if;
   end process countDown;
 
-  Workarround : process(Clock)
+  DisplayReset : process(Clock)
   begin
     if rising_edge(Clock) then
       if(ResetDisplay = '1') then
@@ -86,12 +88,12 @@ begin
     --                             '0' when current_state = WaitReset else
     --                             reset_display_requested;
     end if;
-  end process;
+  end process DisplayReset;
 
   -- State machine
   nextState : process(Clock)
   begin
-    if(rising_edge(Clock))then
+    if(rising_edge(Clock)) then
       if(Reset = '1') then
         current_state <= ActivateReset;
       else
@@ -193,7 +195,6 @@ begin
   end process data_path;
 
   -- Output Logic
-
   busy <= '0' when current_state = Idle else '1';
 
   ChipSelectBar <= '1' when current_state = ActivateReset or

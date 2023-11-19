@@ -1,3 +1,5 @@
+﻿-- lcd_avalon_slave_entity.vhdl
+
 library ieee;
 use ieee.std_logic_1164.all;
 
@@ -27,7 +29,7 @@ end lcd_avalon_slave;
 
 -------- register model -----------
 -- 00  write: Write a command to LCD
---     read :  Read a command from LCD
+--     read : Read a command from LCD
 -- 01  write: Write data to LCD
 --     read : Read data from LCD
 -- 10  r/w  : Control register

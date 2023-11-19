@@ -1,3 +1,5 @@
+-- lcd_avalon_slave_rtl.vdhl
+
 architecture rtl of lcd_avalon_slave is
 
   type LCD_READ_TYPE is (IDLE, WAITBUSY, INITREAD, WAITREAD, RELEASE);
@@ -81,7 +83,8 @@ begin
         else
           s_next_state <= INITREAD;
         end if;
-      when INITREAD => s_next_state <= WAITREAD;
+      when INITREAD => 
+		s_next_state <= WAITREAD;
       when WAITREAD =>
         if (s_busy = '1') then
           s_next_state <= WAITREAD;
@@ -108,11 +111,11 @@ begin
   ---                                                                          ---
   --------------------------------------------------------------------------------
 
-  s_control_next <= slave_write_data when slave_we = '1' and
-                    slave_cs = '1' and
-                    slave_address = "10" else
-                    s_control_reg;
+  s_control_next <= slave_write_data when 
+						slave_we = '1' and slave_cs = '1' and slave_address = "10" else
+						s_control_reg;
 
+  -- write content of the control register (in reset and normal operation)
   make_control_reg : process(Clock)
   begin
     if (rising_edge(Clock)) then
@@ -149,7 +152,7 @@ begin
     if rising_edge(Clock) then
       s_Data_to_send <= slave_write_data(15 downto 0);
 
-      s_CommandBarData <= slave_address(0);
+      s_CommandBarData <= slave_address(0); -- 0=CMD, 1=Data
 
     end if;
   end process sample_data_to_send;
